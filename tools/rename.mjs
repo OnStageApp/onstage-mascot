@@ -27,7 +27,11 @@ const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 let changed = 0;
 for (const f of files) {
   let s = fs.readFileSync(f, 'utf8'); const before = s;
-  for (const [k, v] of pairs) s = s.replace(new RegExp(k === 'component' ? `\\b${esc(cfg[k])}\\b` : esc(cfg[k]), 'g'), v);
+  for (const [k, v] of pairs) {
+    // The component name as a whole word; its static sibling (BuddyStatic) follows it.
+    if (k === 'component') s = s.replace(new RegExp(`\\b${esc(cfg[k])}(Static)?\\b`, 'g'), (_, st) => v + (st ?? ''));
+    else s = s.replace(new RegExp(esc(cfg[k]), 'g'), v);
+  }
   if (s !== before) { fs.writeFileSync(f, s); changed++; console.log('updated', path.relative(ROOT, f)); }
 }
 console.log(`${changed} files changed`);

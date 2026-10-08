@@ -15,11 +15,21 @@
       "types": "./packages/web/dist/react.d.ts",
       "import": "./packages/web/dist/react.js"
     },
-    "./spec/*": "./spec/*"
+    "./static": {
+      "types": "./packages/web/dist/static.d.ts",
+      "import": "./packages/web/dist/static.js"
+    },
+    "./static-svg": {
+      "types": "./packages/web/dist/static-svg.d.ts",
+      "import": "./packages/web/dist/static-svg.js"
+    },
+    "./spec/*": "./spec/*",
+    "./assets/*": "./assets/*"
   },
   "files": [
     "packages/web/dist",
-    "spec"
+    "spec",
+    "assets"
   ],
   "peerDependencies": {
     "react": ">=18"
@@ -38,6 +48,8 @@
     "render-png": "node tools/render-png.mjs",
     "contact-sheet": "node tools/contact-sheet.mjs",
     "parity:web": "node tests/parity/render-web-frames.mjs",
+    "parity:web:static": "node tests/parity/render-web-static.mjs",
+    "export-static": "node tools/export-static.mjs",
     "preview": "node tools/serve.mjs"
   },
   "devDependencies": {

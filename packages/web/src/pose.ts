@@ -2,6 +2,7 @@
 // Follows docs/renderer-contract.md sections "Sampling a clip" and "Phases".
 import type { Clip, Pose, StateDef, EyeType, MouthType } from './types.js';
 import { SPEC } from './spec-data.js';
+import { restPose } from './rest.js';
 
 export type Phase = 'rest' | 'motion' | 'idle';
 
@@ -56,9 +57,7 @@ export function sampleClip(clip: Clip, t: number): Sample {
   return out;
 }
 
-export function restPose(p: Pose): Pose {
-  return { ...p, eyeLPrev: null, eyeLFade: 1, eyeRPrev: null, eyeRFade: 1, mouthPrev: null, mouthFade: 1 };
-}
+export { restPose };
 
 /** Rest pose combined with a clip sample: absolute clips replace fields, additive clips offset them. */
 export function applySample(rest: Pose, clip: Clip, s: Sample): Pose {
