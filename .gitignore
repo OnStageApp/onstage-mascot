@@ -4,3 +4,4 @@ tests/parity/web/
 tests/parity/report/
 .DS_Store
 tests/parity/out/
+tests/parity/web-static/
