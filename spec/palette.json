@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "$comment": "Colour tokens. Scenes and the player name tokens, never hex. A null token is not drawn. \"card\" is the reference background (not part of any scene).",
+  "tokens": [
+    "body",
+    "feet",
+    "arm",
+    "shadow",
+    "navy",
+    "ghost",
+    "deep",
+    "mapLine",
+    "coral",
+    "coralLight",
+    "coralDark",
+    "onCoral",
+    "mint",
+    "white",
+    "card"
+  ],
+  "surfaces": {
+    "light": {
+      "body": "#A4D4E3",
+      "feet": "#A4D4E3",
+      "arm": "#A4D4E3",
+      "shadow": "#7FBFD3",
+      "navy": "#00275C",
+      "ghost": "#CBE6EE",
+      "deep": "#00588C",
+      "mapLine": "#B5D9E4",
+      "coral": "#F28B7D",
+      "coralLight": "#F8BFB8",
+      "coralDark": "#AE6F74",
+      "onCoral": "#00275C",
+      "mint": "#8FD6B5",
+      "white": "#FFFFFF",
+      "card": "#F4F4F2"
+    },
+    "dark": {
+      "body": "#A4D4E3",
+      "feet": "#A4D4E3",
+      "arm": "#A4D4E3",
+      "shadow": null,
+      "navy": "#00275C",
+      "ghost": "#CBE6EE",
+      "deep": "#00588C",
+      "mapLine": "#B5D9E4",
+      "coral": "#F28B7D",
+      "coralLight": "#F8BFB8",
+      "coralDark": "#AE6F74",
+      "onCoral": "#00275C",
+      "mint": "#8FD6B5",
+      "white": "#FFFFFF",
+      "card": "#F4F4F2"
+    }
+  }
+}

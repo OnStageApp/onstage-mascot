@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mascot playground</title>
+<!-- Evolved from claude-brain/design-work/mascot/buddy-anim/buddy.html. Uses the built package:
+     run `npm run build`, then `npm run preview` and open http://localhost:5178/examples/playground.html -->
+<style>
+  :root { --navy: #00275C; --card: #F4F4F2; --muted: #5A6170; --blue: #A4D4E3; --line: #E3E6EA; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; background: #fff; color: var(--navy); }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 28px; margin: 0 0 6px; }
+  p { color: var(--muted); margin: 0 0 20px; line-height: 1.5; }
+  .stage { background: var(--card); border-radius: 24px; display: grid; place-items: center; padding: 16px; }
+  .stage.dark { background: var(--navy); }
+  #buddy { width: min(360px, 100%); aspect-ratio: 1; line-height: 0; }
+  #buddy svg { width: 100%; height: 100%; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; }
+  select, button { font: inherit; font-size: 15px; border-radius: 14px; padding: 10px 14px; color: var(--navy); }
+  select { border: 1px solid var(--line); background: #fff; min-width: 0; flex: 1 1 240px; }
+  button { border: 0; background: var(--blue); cursor: pointer; }
+  button:hover { filter: brightness(.95); }
+  label { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); margin-right: 12px; }
+  .info { margin-top: 16px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .info b { color: var(--navy); }
+  input[type=range] { flex: 1 1 200px; }
+  code { font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mascot playground</h1>
+  <p>Every state from <code>spec/states.json</code>, drawn by the web player from data. A state plays its motion once, then idles and blinks at random. The scrubber pauses the player and shows one baked frame.</p>
+  <div class="stage" id="stage"><div id="buddy"></div></div>
+  <div class="row">
+    <button id="prev" aria-label="Previous state">&#8592;</button>
+    <select id="state" aria-label="State"></select>
+    <button id="next" aria-label="Next state">&#8594;</button>
+    <button id="play">Play</button>
+  </div>
+  <div class="row">
+    <label><input type="checkbox" id="dark"> Dark surface</label>
+    <label><input type="checkbox" id="reduce"> Reduced motion</label>
+    <label><input type="checkbox" id="idleStart"> Start in idle</label>
+  </div>
+  <div class="row">
+    <input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Motion frame">
+    <span id="frameLabel" class="info" style="margin:0">live</span>
+  </div>
+  <div class="info" id="info"></div>
+</main>
+<script type="module">
+  import { SPEC, createPlayer, renderFrameSvg, getState } from '../packages/web/dist/index.js';
+
+  const $ = id => document.getElementById(id);
+  const el = $('buddy'), sel = $('state'), scrub = $('scrub');
+  for (const g of SPEC.states.groups) {
+    const og = document.createElement('optgroup'); og.label = g;
+    for (const s of SPEC.states.states.filter(s => s.group === g)) og.append(new Option(`${s.name}  (${s.key})`, s.key));
+    sel.append(og);
+  }
+  const fromHash = decodeURIComponent(location.hash.slice(1));
+  if (SPEC.states.states.some(s => s.key === fromHash)) sel.value = fromHash;
+
+  const surface = () => ($('dark').checked ? 'dark' : 'light');
+  let player = null;
+  function start() {
+    player?.destroy();
+    const st = getState(sel.value), clip = SPEC.motion[st.motion.id];
+    location.hash = st.key;
+    scrub.max = clip.frames - 1; scrub.value = 0; $('frameLabel').textContent = 'live';
+    $('info').innerHTML = `<b>${st.name}</b> (${st.group}). Use it for: ${st.use}.<br>`
+      + `Motion <code>${clip.id}</code>, ${st.motion.plays}, ${clip.frames} frames at ${clip.fps} fps (${clip.duration}s)`
+      + `${st.motion.then ? ', then idle' : ''}. ${clip.source ?? ''}`;
+    player = createPlayer({ state: st.key, target: el, surface: surface(), reducedMotion: $('reduce').checked,
+      playOnMount: !$('idleStart').checked, onDone: () => console.log('done', st.key) });
+  }
+  sel.onchange = start;
+  $('play').onclick = start;
+  $('prev').onclick = () => { sel.selectedIndex = (sel.selectedIndex + sel.options.length - 1) % sel.options.length; start(); };
+  $('next').onclick = () => { sel.selectedIndex = (sel.selectedIndex + 1) % sel.options.length; start(); };
+  $('dark').onchange = () => { $('stage').classList.toggle('dark', $('dark').checked); player?.setSurface(surface()); };
+  $('reduce').onchange = () => player?.setReducedMotion($('reduce').checked);
+  $('idleStart').onchange = start;
+  scrub.oninput = () => {
+    player?.pause();
+    el.innerHTML = renderFrameSvg(sel.value, { phase: 'motion', frame: +scrub.value }, { surface: surface() });
+    $('frameLabel').textContent = `frame ${scrub.value}`;
+  };
+  document.addEventListener('keydown', e => { if (e.target === sel) return; if (e.key === 'ArrowRight') $('next').click(); if (e.key === 'ArrowLeft') $('prev').click(); });
+  start();
+</script>
+</body>
+</html>

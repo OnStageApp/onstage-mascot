@@ -1,0 +1,919 @@
+{
+ "format": 1,
+ "note": "Render each case at size x size px, opaque, with the palette token \"card\" (light surface) filling the canvas behind the scene. frame is a 30 fps index into the phase clip (t = frame / 30 s). Blink factor 1, light surface.",
+ "size": 480,
+ "surface": "light",
+ "background": "card",
+ "cases": [
+  {
+   "file": "motion-hello-f000.png",
+   "state": "hello",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-hello-f036.png",
+   "state": "hello",
+   "phase": "motion",
+   "frame": 36,
+   "t": 1.2
+  },
+  {
+   "file": "motion-hello-f073.png",
+   "state": "hello",
+   "phase": "motion",
+   "frame": 73,
+   "t": 2.433333333333333
+  },
+  {
+   "file": "motion-welcome-team-f000.png",
+   "state": "welcome-team",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-welcome-team-f031.png",
+   "state": "welcome-team",
+   "phase": "motion",
+   "frame": 31,
+   "t": 1.0333333333333334
+  },
+  {
+   "file": "motion-welcome-team-f062.png",
+   "state": "welcome-team",
+   "phase": "motion",
+   "frame": 62,
+   "t": 2.066666666666667
+  },
+  {
+   "file": "motion-all-set-f000.png",
+   "state": "all-set",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-all-set-f032.png",
+   "state": "all-set",
+   "phase": "motion",
+   "frame": 32,
+   "t": 1.0666666666666667
+  },
+  {
+   "file": "motion-all-set-f065.png",
+   "state": "all-set",
+   "phase": "motion",
+   "frame": 65,
+   "t": 2.1666666666666665
+  },
+  {
+   "file": "motion-no-events-f000.png",
+   "state": "no-events",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-no-events-f057.png",
+   "state": "no-events",
+   "phase": "motion",
+   "frame": 57,
+   "t": 1.9
+  },
+  {
+   "file": "motion-no-events-f115.png",
+   "state": "no-events",
+   "phase": "motion",
+   "frame": 115,
+   "t": 3.8333333333333335
+  },
+  {
+   "file": "motion-no-results-f000.png",
+   "state": "no-results",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-no-results-f040.png",
+   "state": "no-results",
+   "phase": "motion",
+   "frame": 40,
+   "t": 1.3333333333333333
+  },
+  {
+   "file": "motion-no-results-f081.png",
+   "state": "no-results",
+   "phase": "motion",
+   "frame": 81,
+   "t": 2.7
+  },
+  {
+   "file": "motion-event-created-f000.png",
+   "state": "event-created",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-event-created-f042.png",
+   "state": "event-created",
+   "phase": "motion",
+   "frame": 42,
+   "t": 1.4
+  },
+  {
+   "file": "motion-event-created-f084.png",
+   "state": "event-created",
+   "phase": "motion",
+   "frame": 84,
+   "t": 2.8
+  },
+  {
+   "file": "motion-invite-sent-f000.png",
+   "state": "invite-sent",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-invite-sent-f042.png",
+   "state": "invite-sent",
+   "phase": "motion",
+   "frame": 42,
+   "t": 1.4
+  },
+  {
+   "file": "motion-invite-sent-f085.png",
+   "state": "invite-sent",
+   "phase": "motion",
+   "frame": 85,
+   "t": 2.8333333333333335
+  },
+  {
+   "file": "motion-plan-ready-f000.png",
+   "state": "plan-ready",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-plan-ready-f037.png",
+   "state": "plan-ready",
+   "phase": "motion",
+   "frame": 37,
+   "t": 1.2333333333333334
+  },
+  {
+   "file": "motion-plan-ready-f074.png",
+   "state": "plan-ready",
+   "phase": "motion",
+   "frame": 74,
+   "t": 2.466666666666667
+  },
+  {
+   "file": "motion-done-f000.png",
+   "state": "done",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-done-f025.png",
+   "state": "done",
+   "phase": "motion",
+   "frame": 25,
+   "t": 0.8333333333333334
+  },
+  {
+   "file": "motion-done-f051.png",
+   "state": "done",
+   "phase": "motion",
+   "frame": 51,
+   "t": 1.7
+  },
+  {
+   "file": "motion-waiting-f000.png",
+   "state": "waiting",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-waiting-f042.png",
+   "state": "waiting",
+   "phase": "motion",
+   "frame": 42,
+   "t": 1.4
+  },
+  {
+   "file": "motion-waiting-f085.png",
+   "state": "waiting",
+   "phase": "motion",
+   "frame": 85,
+   "t": 2.8333333333333335
+  },
+  {
+   "file": "motion-offline-f000.png",
+   "state": "offline",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-offline-f046.png",
+   "state": "offline",
+   "phase": "motion",
+   "frame": 46,
+   "t": 1.5333333333333334
+  },
+  {
+   "file": "motion-offline-f093.png",
+   "state": "offline",
+   "phase": "motion",
+   "frame": 93,
+   "t": 3.1
+  },
+  {
+   "file": "motion-oops-f000.png",
+   "state": "oops",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-oops-f032.png",
+   "state": "oops",
+   "phase": "motion",
+   "frame": 32,
+   "t": 1.0666666666666667
+  },
+  {
+   "file": "motion-oops-f064.png",
+   "state": "oops",
+   "phase": "motion",
+   "frame": 64,
+   "t": 2.1333333333333333
+  },
+  {
+   "file": "motion-loading-f000.png",
+   "state": "loading",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-loading-f047.png",
+   "state": "loading",
+   "phase": "motion",
+   "frame": 47,
+   "t": 1.5666666666666667
+  },
+  {
+   "file": "motion-loading-f095.png",
+   "state": "loading",
+   "phase": "motion",
+   "frame": 95,
+   "t": 3.1666666666666665
+  },
+  {
+   "file": "motion-session-expired-f000.png",
+   "state": "session-expired",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-session-expired-f052.png",
+   "state": "session-expired",
+   "phase": "motion",
+   "frame": 52,
+   "t": 1.7333333333333334
+  },
+  {
+   "file": "motion-session-expired-f105.png",
+   "state": "session-expired",
+   "phase": "motion",
+   "frame": 105,
+   "t": 3.5
+  },
+  {
+   "file": "motion-sleepy-f000.png",
+   "state": "sleepy",
+   "phase": "motion",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "motion-sleepy-f052.png",
+   "state": "sleepy",
+   "phase": "motion",
+   "frame": 52,
+   "t": 1.7333333333333334
+  },
+  {
+   "file": "motion-sleepy-f105.png",
+   "state": "sleepy",
+   "phase": "motion",
+   "frame": 105,
+   "t": 3.5
+  },
+  {
+   "file": "rest-01-hello.png",
+   "state": "hello",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-02-welcome-team.png",
+   "state": "welcome-team",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-03-setup-event.png",
+   "state": "setup-event",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-04-all-set.png",
+   "state": "all-set",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-05-no-events.png",
+   "state": "no-events",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-06-no-songs.png",
+   "state": "no-songs",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-07-no-team.png",
+   "state": "no-team",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-08-no-notifications.png",
+   "state": "no-notifications",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-09-no-results.png",
+   "state": "no-results",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-10-no-sunday.png",
+   "state": "no-sunday",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-11-event-created.png",
+   "state": "event-created",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-12-saved.png",
+   "state": "saved",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-13-invite-sent.png",
+   "state": "invite-sent",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-14-everyone-confirmed.png",
+   "state": "everyone-confirmed",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-15-plan-ready.png",
+   "state": "plan-ready",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-16-done.png",
+   "state": "done",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-17-rehearsal.png",
+   "state": "rehearsal",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-18-scheduled.png",
+   "state": "scheduled",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-19-waiting.png",
+   "state": "waiting",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-20-declined.png",
+   "state": "declined",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-21-unavailable.png",
+   "state": "unavailable",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-22-new-message.png",
+   "state": "new-message",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-23-offline.png",
+   "state": "offline",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-24-oops.png",
+   "state": "oops",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-25-no-access.png",
+   "state": "no-access",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-26-loading.png",
+   "state": "loading",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-27-session-expired.png",
+   "state": "session-expired",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-28-happy.png",
+   "state": "happy",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-29-thinking.png",
+   "state": "thinking",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-30-surprised.png",
+   "state": "surprised",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-31-proud.png",
+   "state": "proud",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-32-sleepy.png",
+   "state": "sleepy",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-33-sure.png",
+   "state": "sure",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-34-idle.png",
+   "state": "idle",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-35-excited.png",
+   "state": "excited",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-36-thankful.png",
+   "state": "thankful",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-37-wink.png",
+   "state": "wink",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-38-confused.png",
+   "state": "confused",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-39-sad.png",
+   "state": "sad",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-40-shy.png",
+   "state": "shy",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-41-talking.png",
+   "state": "talking",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-42-shrug.png",
+   "state": "shrug",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-43-goodbye.png",
+   "state": "goodbye",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-44-welcome-back.png",
+   "state": "welcome-back",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-45-nervous.png",
+   "state": "nervous",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-46-focused.png",
+   "state": "focused",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-47-laughing.png",
+   "state": "laughing",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-48-curious.png",
+   "state": "curious",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-49-determined.png",
+   "state": "determined",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-50-on-it.png",
+   "state": "on-it",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-51-sorry.png",
+   "state": "sorry",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-52-peek.png",
+   "state": "peek",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-53-pointing.png",
+   "state": "pointing",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-54-pointup.png",
+   "state": "pointup",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-55-pointdown.png",
+   "state": "pointdown",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-56-pointleft.png",
+   "state": "pointleft",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-57-thumbsup.png",
+   "state": "thumbsup",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-58-clapping.png",
+   "state": "clapping",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-59-highfive.png",
+   "state": "highfive",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-60-running.png",
+   "state": "running",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-61-reading.png",
+   "state": "reading",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-62-planning.png",
+   "state": "planning",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-63-phone.png",
+   "state": "phone",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-64-laptop.png",
+   "state": "laptop",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-65-carrying.png",
+   "state": "carrying",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-66-sign.png",
+   "state": "sign",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-67-megaphone.png",
+   "state": "megaphone",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-68-reminder.png",
+   "state": "reminder",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-69-lost.png",
+   "state": "lost",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-70-maintenance.png",
+   "state": "maintenance",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-71-idea.png",
+   "state": "idea",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-72-slides.png",
+   "state": "slides",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-73-swap.png",
+   "state": "swap",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-74-qrcode.png",
+   "state": "qrcode",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-75-link.png",
+   "state": "link",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-76-new-feature.png",
+   "state": "new-feature",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-77-export.png",
+   "state": "export",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-78-listening.png",
+   "state": "listening",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-79-singing.png",
+   "state": "singing",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-80-playing.png",
+   "state": "playing",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-81-keyboard.png",
+   "state": "keyboard",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-82-drums.png",
+   "state": "drums",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-83-mixing.png",
+   "state": "mixing",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-84-transpose.png",
+   "state": "transpose",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "rest-85-setlist.png",
+   "state": "setlist",
+   "phase": "rest",
+   "frame": 0,
+   "t": 0
+  }
+ ]
+}

@@ -1,0 +1,228 @@
+{
+  "note": "interpolationError: max abs difference between linear interpolation of the stored 30 fps frames and the 60 fps rig, at every 60 fps instant. pos in body units (x 2.2 = px on the 240 canvas for a lone Buddy), ang in degrees, scale and presence unitless, opacity per eye or mouth shape. endResidual: largest gap closed when the last frame is snapped to the rest pose. loopSeam: rig drift over one loop period.",
+  "worst": {
+    "pos": 0.838,
+    "ang": 4.42,
+    "scale": 0.0831,
+    "presence": 0.0364,
+    "opacity": 0.0595
+  },
+  "sizes": {
+    "motion": {
+      "rawKB": 98.5,
+      "gzipKB": 19
+    },
+    "states": {
+      "rawKB": 120.6,
+      "gzipKB": 10.4
+    },
+    "palette": {
+      "rawKB": 1.2,
+      "gzipKB": 0.4
+    },
+    "motionPlusStates": {
+      "rawKB": 219.1,
+      "gzipKB": 29.6
+    }
+  },
+  "clips": {
+    "hello": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 74,
+      "duration": 2.433,
+      "fields": 24,
+      "constants": 12,
+      "endResidual": 0.000377,
+      "interpolationError": {"pos":0.837,"ang":4.42,"scale":0.0143,"presence":0.0354,"opacity":0.0595,"worstField":{"pos":"aL","ang":"aL","scale":"sy","presence":"aL","opacity":"eyeL"}}
+    },
+    "all-set": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 66,
+      "duration": 2.167,
+      "fields": 28,
+      "constants": 8,
+      "endResidual": 0.000302,
+      "interpolationError": {"pos":0.619,"ang":1.31,"scale":0.0142,"presence":0.0361,"opacity":0.0595,"worstField":{"pos":"aL","ang":"footLRot","scale":"sy","presence":"aL","opacity":"eyeL"}}
+    },
+    "no-results": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 82,
+      "duration": 2.7,
+      "fields": 10,
+      "constants": 26,
+      "endResidual": 0.000793,
+      "interpolationError": {"pos":0.239,"ang":0.402,"scale":0.000992,"presence":0,"opacity":0.024,"worstField":{"pos":"edx","ang":"tilt","scale":"sy","opacity":"mouth"}}
+    },
+    "event-created": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 85,
+      "duration": 2.8,
+      "fields": 26,
+      "constants": 10,
+      "endResidual": 0.000817,
+      "interpolationError": {"pos":0.837,"ang":3.24,"scale":0.0146,"presence":0.0361,"opacity":0.0595,"worstField":{"pos":"aR","scale":"sy","presence":"aL","opacity":"eyeL","ang":"aR"}}
+    },
+    "plan-ready": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 75,
+      "duration": 2.467,
+      "fields": 23,
+      "constants": 13,
+      "endResidual": 0.00069,
+      "interpolationError": {"pos":0.838,"ang":0.973,"scale":0.005,"presence":0.0364,"opacity":0.0595,"worstField":{"pos":"aL","ang":"aL","scale":"sy","presence":"aL","opacity":"eyeL"}}
+    },
+    "loading": {
+      "kind": "absolute",
+      "plays": "loop",
+      "new": false,
+      "frames": 96,
+      "duration": 1.6,
+      "fields": 9,
+      "constants": 27,
+      "loopSeam": 4.57e-13,
+      "interpolationError": {"pos":0.174,"ang":0.0323,"scale":0.0143,"presence":0,"opacity":0.024,"worstField":{"scale":"sy","opacity":"mouth","pos":"edx","ang":"tilt"}}
+    },
+    "session-expired": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 106,
+      "duration": 3.5,
+      "fields": 20,
+      "constants": 16,
+      "endResidual": 0.000604,
+      "interpolationError": {"pos":0.732,"ang":0.638,"scale":0.0831,"presence":0.0354,"opacity":0.0595,"worstField":{"pos":"aL","ang":"tilt","scale":"blink","opacity":"eyeL","presence":"aL"}}
+    },
+    "sleepy": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": false,
+      "frames": 106,
+      "duration": 3.5,
+      "fields": 20,
+      "constants": 16,
+      "endResidual": 0.000604,
+      "interpolationError": {"pos":0.732,"ang":0.638,"scale":0.0831,"presence":0.0354,"opacity":0.0595,"worstField":{"pos":"aL","ang":"tilt","scale":"blink","opacity":"eyeL","presence":"aL"}}
+    },
+    "oops": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 65,
+      "duration": 2.133,
+      "fields": 28,
+      "constants": 8,
+      "endResidual": 0.00094,
+      "interpolationError": {"pos":0.726,"ang":1.8,"scale":0.053,"presence":0.0354,"opacity":0.0595,"worstField":{"pos":"aR","ang":"aL","scale":"blink","opacity":"eyeL","presence":"aL"}}
+    },
+    "welcome-team": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 63,
+      "duration": 2.067,
+      "fields": 6,
+      "constants": 30,
+      "endResidual": 0.000866,
+      "interpolationError": {"pos":0.0209,"ang":0.774,"scale":0.00132,"presence":0,"opacity":0,"worstField":{"pos":"y","ang":"aR","scale":"sy"}}
+    },
+    "no-events": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 116,
+      "duration": 3.833,
+      "fields": 5,
+      "constants": 31,
+      "endResidual": 4.55e-13,
+      "interpolationError": {"pos":0.00775,"ang":0.00304,"scale":0.0704,"presence":0,"opacity":0,"worstField":{"pos":"edx","ang":"tilt","scale":"blink"}}
+    },
+    "invite-sent": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 86,
+      "duration": 2.833,
+      "fields": 13,
+      "constants": 23,
+      "endResidual": 4.07e-7,
+      "interpolationError": {"pos":0.0264,"ang":0.574,"scale":0.000498,"presence":0,"opacity":0.0595,"worstField":{"pos":"edy","opacity":"eyeL","ang":"aR","scale":"sx"}}
+    },
+    "done": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 52,
+      "duration": 1.7,
+      "fields": 6,
+      "constants": 30,
+      "endResidual": 3.83e-9,
+      "interpolationError": {"pos":0.0463,"ang":0.0318,"scale":0.000894,"presence":0,"opacity":0,"worstField":{"pos":"edy","ang":"tilt","scale":"sy"}}
+    },
+    "waiting": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 86,
+      "duration": 2.833,
+      "fields": 7,
+      "constants": 29,
+      "endResidual": 0.0000462,
+      "interpolationError": {"pos":0.0926,"ang":0.639,"scale":0.000536,"presence":0,"opacity":0,"worstField":{"ang":"footRRot","pos":"edy","scale":"sy"}}
+    },
+    "offline": {
+      "kind": "absolute",
+      "plays": "once",
+      "new": true,
+      "frames": 94,
+      "duration": 3.1,
+      "fields": 11,
+      "constants": 25,
+      "endResidual": 0.000615,
+      "interpolationError": {"pos":0.424,"ang":0.135,"scale":0.000933,"presence":0.0354,"opacity":0,"worstField":{"pos":"aR","ang":"aR","scale":"blink","presence":"aR"}}
+    },
+    "pop": {
+      "kind": "additive",
+      "plays": "once",
+      "new": true,
+      "frames": 36,
+      "duration": 1.167,
+      "fields": 3,
+      "constants": 0,
+      "endResidual": 5.79e-7,
+      "interpolationError": {"pos":0.05,"ang":0,"scale":0.00561,"presence":0,"opacity":0,"worstField":{"scale":"sy","pos":"y"}}
+    },
+    "idle": {
+      "kind": "additive",
+      "plays": "loop",
+      "new": false,
+      "frames": 90,
+      "duration": 3,
+      "fields": 6,
+      "constants": 0,
+      "loopSeam": 3.53e-40,
+      "interpolationError": {"pos":0.00246,"ang":0.00106,"scale":0.000495,"presence":0,"opacity":0,"worstField":{"pos":"footL","ang":"tilt","scale":"sx"}}
+    },
+    "blink": {
+      "kind": "additive",
+      "plays": "once",
+      "new": false,
+      "frames": 12,
+      "duration": 0.367,
+      "fields": 1,
+      "constants": 0,
+      "endResidual": 6.05e-7,
+      "interpolationError": {"pos":0,"ang":0,"scale":0.0704,"presence":0,"opacity":0,"worstField":{"scale":"blink"}}
+    }
+  }
+}

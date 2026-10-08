@@ -1,0 +1,7 @@
+{
+  "$comment": "The ONE place for names. The mascot's real name is undecided; rename with: node tools/rename.mjs <key>=<new value>. tests/names.test.mjs checks every other file agrees with this one.",
+  "repo": "onstage-mascot",
+  "npmName": "@onstage/mascot",
+  "dartPackage": "onstage_mascot",
+  "component": "Buddy"
+}
