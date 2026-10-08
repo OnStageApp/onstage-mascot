@@ -13,6 +13,7 @@ export 'src/rng.dart' show mulberry32;
 export 'src/spec.dart'
     show
         MascotSpec,
+        MascotStates,
         MascotSurface,
         MascotColors,
         MascotStateDef,

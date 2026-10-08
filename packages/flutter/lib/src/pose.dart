@@ -2,7 +2,10 @@
 // Follows docs/renderer-contract.md sections 7 (sampling), 8 (combining) and 9.1 (phases).
 import 'dart:math' as math;
 
+import 'frame.dart';
 import 'spec.dart';
+
+export 'frame.dart';
 
 /// The three player phases (contract section 9.1).
 enum MascotPhase { rest, motion, idle }
@@ -35,86 +38,6 @@ const Set<String> _discrete = {
   'mouthPrev',
   'mouthFade',
 };
-
-/// A character pose in body units (the tile is 64 by 54). Numbers by field name, plus the eye and
-/// mouth types with their crossfade state.
-class MascotPose {
-  MascotPose._(
-    this.values, {
-    required this.eyeL,
-    required this.eyeR,
-    required this.mouth,
-    this.eyeLPrev,
-    this.eyeRPrev,
-    this.mouthPrev,
-  });
-
-  /// The rest pose of [actor]: Prev null, Fade 1.
-  factory MascotPose.rest(MascotActor actor) {
-    final v = <String, double>{};
-    actor.rest.forEach((k, val) {
-      if (val is double) v[k] = val;
-    });
-    v['eyeLFade'] = 1;
-    v['eyeRFade'] = 1;
-    v['mouthFade'] = 1;
-    return MascotPose._(
-      v,
-      eyeL: actor.rest['eyeL']! as String,
-      eyeR: actor.rest['eyeR']! as String,
-      mouth: actor.rest['mouth']! as String,
-    );
-  }
-
-  /// Numeric fields (contract section 2), including `eyeLFade`, `eyeRFade` and `mouthFade`.
-  final Map<String, double> values;
-  String eyeL, eyeR, mouth;
-  String? eyeLPrev, eyeRPrev, mouthPrev;
-
-  /// A numeric field; 0 when absent.
-  double operator [](String field) => values[field] ?? 0;
-  void operator []=(String field, double v) => values[field] = v;
-
-  double get eyeLFade => this['eyeLFade'];
-  double get eyeRFade => this['eyeRFade'];
-  double get mouthFade => this['mouthFade'];
-
-  /// The type, previous type and fade of track [track] (`eyeL`, `eyeR` or `mouth`).
-  (String, String?, double) track(String track) => switch (track) {
-    'eyeL' => (eyeL, eyeLPrev, eyeLFade),
-    'eyeR' => (eyeR, eyeRPrev, eyeRFade),
-    _ => (mouth, mouthPrev, mouthFade),
-  };
-
-  void _setTrack(String track, String type, String? prev, double fade) {
-    switch (track) {
-      case 'eyeL':
-        eyeL = type;
-        eyeLPrev = prev;
-      case 'eyeR':
-        eyeR = type;
-        eyeRPrev = prev;
-      default:
-        mouth = type;
-        mouthPrev = prev;
-    }
-    values['${track}Fade'] = fade;
-  }
-
-  MascotPose copy() => MascotPose._(
-    Map.of(values),
-    eyeL: eyeL,
-    eyeR: eyeR,
-    mouth: mouth,
-    eyeLPrev: eyeLPrev,
-    eyeRPrev: eyeRPrev,
-    mouthPrev: mouthPrev,
-  );
-
-  @override
-  String toString() =>
-      'MascotPose(eyeL: $eyeL/$eyeLPrev, eyeR: $eyeR/$eyeRPrev, mouth: $mouth/$mouthPrev, $values)';
-}
 
 /// The two rows a time falls between and the weight of the second: contract section 7, `locate`.
 (int, int, double) locate(MascotClip clip, double t) {
@@ -204,7 +127,7 @@ MascotPose applySample(MascotActor actor, MascotClip clip, ClipSample s) {
   final p = MascotPose.rest(actor);
   if (clip.isAbsolute) {
     s.numbers.forEach((k, v) => p[k] = v);
-    s.tracks.forEach((tr, v) => p._setTrack(tr, v.$1, v.$2, v.$3));
+    s.tracks.forEach((tr, v) => _setTrack(p, tr, v.$1, v.$2, v.$3));
   } else {
     s.numbers.forEach((k, v) {
       if (_add.contains(k)) {
@@ -215,6 +138,27 @@ MascotPose applySample(MascotActor actor, MascotClip clip, ClipSample s) {
     });
   }
   return p;
+}
+
+void _setTrack(
+  MascotPose p,
+  String track,
+  String type,
+  String? prev,
+  double fade,
+) {
+  switch (track) {
+    case 'eyeL':
+      p.eyeL = type;
+      p.eyeLPrev = prev;
+    case 'eyeR':
+      p.eyeR = type;
+      p.eyeRPrev = prev;
+    default:
+      p.mouth = type;
+      p.mouthPrev = prev;
+  }
+  p['${track}Fade'] = fade;
 }
 
 /// The clip [phase] plays for [state], or null for the rest phase.
@@ -274,13 +218,6 @@ MascotPose _actorPose(
   final b = (blink != null && i < blink.length) ? blink[i] : 1.0;
   if (b != 1) pose['blink'] = pose['blink'] * b;
   return pose;
-}
-
-/// One frame of a state: the state and every actor's pose. What the painter draws.
-class MascotFrame {
-  const MascotFrame(this.state, this.poses);
-  final MascotStateDef state;
-  final List<MascotPose> poses;
 }
 
 /// Pure: the frame of state [key] at [t] seconds into [phase], or at a 30 fps [frame] index (the
