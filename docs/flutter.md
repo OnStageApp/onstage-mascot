@@ -64,17 +64,58 @@ final image = await renderMascotImage(frame, 480, background: 'card');
 final player = MascotPlayer(state: 'hello', random: mulberry32(7))..advance(1 / 60);
 ```
 
-## The data: a generated Dart file, not an asset copy
+## Static usage
 
-`lib/src/spec_data.g.dart` holds the text of every `spec/` file, verbatim, in raw string constants.
-`MascotSpec.instance` parses the palette and states on first use and each clip the first time it is
-needed. This was chosen over copying `spec/` into the package as assets because:
+`Buddy` plays the state's motion and idles with blinks. When animation is unwanted or heavy (empty
+states, long lists, screens that must stay still), use `BuddyStatic`: it draws the **resting pose** of a
+state, once. It is a stateless `CustomPaint` widget with no `Ticker`, no `AnimationController` and no
+timers, and it paints with the same `paintMascotFrame` as `Buddy` on the state's rest poses, so it draws
+exactly the pose `Buddy` starts from (a test compares the pixels, for all 85 states on both surfaces).
+
+```dart
+import 'package:onstage_mascot/static.dart';
+
+const BuddyStatic(state: 'no-events', size: 160)
+BuddyStatic(state: 'hello', surface: MascotSurface.dark, semanticLabel: 'Welcome')
+```
+
+| prop | default | |
+|---|---|---|
+| `state` | required | A key from `spec/states.json`, for example `no-events`. |
+| `surface` | `MascotSurface.light` | `dark` hides the ground shadow. |
+| `size` | 160 | Width and height in logical pixels. |
+| `semanticLabel` | state name | Semantics label; `''` hides it from assistive technology. |
+| `excludeFromSemantics` | false | Leave it out of the semantics tree (purely decorative). |
+
+`package:onstage_mascot/static.dart` imports only the states data (`states_data.g.dart`), never the
+player, the sampler, the random source or the baked clips (`motion_data.g.dart`), and
+`test/static_test.dart` checks that import graph. It also exports `MascotSurface`, `mascotStateKeys`
+and `mascotStateInfo` (key, group, name and use note of every state). Both libraries can be imported
+together. An app that imports only `static.dart` never references the motion data, so a release build
+has no reason to carry it (the unreferenced constants are left out by tree shaking; not measured here).
+
+Accessibility: `BuddyStatic` is a picture, so it wraps itself in `Semantics(image: true)` with the
+state's name as the label (for example "No events yet"). Change the words with `semanticLabel`; if the
+text next to it already says everything, use `excludeFromSemantics: true`.
+
+For files rather than a widget (emails, marketing, stickers), see `assets/` and `npm run export-static`
+in the root README.
+
+## The data: generated Dart files, not an asset copy
+
+Two generated files hold the text of every `spec/` file, verbatim, in raw string constants:
+`lib/src/states_data.g.dart` (`palette.json` and `states.json`) and `lib/src/motion_data.g.dart`
+(`motion/*.json`). They are separate so the static library imports the first and not the second.
+`MascotStates.instance` parses the palette and states on first use; `MascotSpec.instance` (which
+extends `MascotStates` and shares the same parsed states) adds the clips, each parsed the first
+time it is needed. This was chosen over copying `spec/` into the package as assets because:
 
 - a Flutter package cannot declare assets outside its own folder, so assets would need a copied
   folder anyway;
 - a source file gives the data synchronously: no asset bundle, no async first frame, and plain unit
   tests work without a binding;
-- it mirrors the web package, which embeds `spec/` in `src/spec-data.ts`.
+- it mirrors the web package, which embeds `spec/` in `src/spec-data.ts` (everything) and
+  `src/static-data.ts` (states only).
 
 After any change to `spec/` (after `npm run bake`), regenerate it in `packages/flutter`:
 
@@ -82,8 +123,9 @@ After any change to `spec/` (after `npm run bake`), regenerate it in `packages/f
 dart run tool/gen_spec_data.dart
 ```
 
-`test/spec_drift_test.dart` regenerates it in memory and fails if the checked-in file differs from
-`spec/`, so a forgotten regeneration cannot ship. The generated file is about 230 KB of source.
+`test/spec_drift_test.dart` regenerates both in memory and fails if a checked-in file differs from
+`spec/`, so a forgotten regeneration cannot ship. The generated files are about 125 KB (states) and
+100 KB (motion) of source.
 
 ## Tests
 
@@ -104,7 +146,9 @@ dart format .
 | `spec_drift_test.dart` | the generated data equals `spec/`; every state's clip exists |
 | `names_test.dart` | package and widget names equal `mascot.config.json` |
 | `buddy_test.dart` | motion then `onDone` then idle, reduced motion, the prop overriding `MediaQuery`, lifecycle pause, semantics, every state painting on both surfaces |
+| `static_test.dart` | `static.dart`'s import graph (no player, sampler, rng or motion data, no Ticker or Timer in what it loads), `BuddyStatic` builds all 85 states on both surfaces, schedules no frames, paints the same pixels as the frame painter and as `Buddy` at rest, and its semantics |
 | `parity_render_test.dart` | renders the parity PNGs (below) |
+| `parity_static_test.dart` | renders the static parity PNGs with `BuddyStatic` (below) |
 
 The web trace lives in `test/fixtures/web_player_trace.json`. Regenerate it from the repo root
 after changing `spec/` or the web player: `npm run build && node packages/flutter/tool/web-trace.mjs`.
@@ -114,8 +158,9 @@ after changing `spec/` or the web player: `npm run build && node packages/flutte
 From the repo root:
 
 ```sh
-packages/flutter/tool/parity.sh            # the 130 manifest cases
+packages/flutter/tool/parity.sh            # the 130 manifest cases, then the 170 static cases
 EXTRA=1 packages/flutter/tool/parity.sh    # plus 260 extra cases
+STATIC=1 packages/flutter/tool/parity.sh   # the static cases only
 ```
 
 It runs `npm run parity:web` (web frames and `tests/parity/manifest.json`), then
@@ -146,6 +191,26 @@ wrap, explicit blink factors on `oval`, `big` and `small` eyes, and the dark sur
 Closest to the tolerance: `rest-73-swap` in the 4x set (max 42 of 48), a navy cubic stroke with
 round caps. At the default `--tol-max 48` the straight set fails 68 of 130 cases, every one on max
 alone (worst mean 0.099 against 0.5, worst pixel share 0.073% against 1%).
+
+### Static mode
+
+`npm run parity:web:static` renders the resting pose of all 85 states on both surfaces with the web
+static entry (`renderRestSvg`, rasterised by `rsvg-convert` on the `card` colour) and writes
+`tests/parity/manifest-static.json` (170 cases: 85 light, 85 dark). `test/parity_static_test.dart` renders the
+same cases with the `BuddyStatic` widget, a `ColoredBox` of the card colour behind it (the widget is
+transparent, so the comparison also covers that), straight at 480 px and captured at pixel ratio 4 then
+box-filtered, into `tests/parity/out/flutter-static/` and `flutter-static/ss4/`. `compare.py` then applies the
+same rules as the animated parity: the defaults at 4x, and the straight run with only `--tol-max` raised to 112.
+
+| comparison | cases | failing | max | mean of means | worst mean | worst pixel share over 32 | tolerance |
+|---|---|---|---|---|---|---|---|
+| static, 4x box-filtered | 170 | 0 | 42 | 0.0118 | 0.0274 | 0.0009% | defaults (max 48, mean 0.5, 1%) |
+| static, straight 480 px | 170 | 0 | 88 | 0.0422 | 0.0958 | 0.073% | max 112, mean 0.5, 1% |
+
+(2026-10-08, Flutter 3.47.4, rsvg-convert from Homebrew.) Light surface alone, the 85 states of the
+brief: 4x max 42, mean of means 0.0131; straight max 88, mean of means 0.0460, worst mean 0.0958. At the default
+`--tol-max 48` the straight run fails 78 of 170 cases (39 of the 85 light ones), every one on max alone, the same
+anti-aliasing floor described below. The worst case is again `rest-73-swap`.
 
 ### Why two comparisons, and why max 112 for the straight one
 
