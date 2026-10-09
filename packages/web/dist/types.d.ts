@@ -155,6 +155,18 @@ export interface Clip {
     props?: Record<string, unknown>;
     rows: number[][];
 }
+/** A state as the static entry carries it: everything but the motion reference. */
+export type StaticStateDef = Omit<StateDef, 'motion'>;
+/** What the static entry embeds: palette, canvas, ground and the states, with no motion, idle or blink data. */
+export interface StaticSpecData {
+    palette: PaletteDoc;
+    canvas: {
+        width: number;
+        height: number;
+    };
+    ground: number;
+    states: StaticStateDef[];
+}
 export interface SpecData {
     palette: PaletteDoc;
     states: StatesDoc;

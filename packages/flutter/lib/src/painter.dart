@@ -5,8 +5,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart' hide Layer;
 
-import 'pose.dart';
-import 'spec.dart';
+import 'frame.dart';
+import 'states.dart';
 
 double _rad(double deg) => deg * math.pi / 180;
 
@@ -19,9 +19,9 @@ void paintMascotFrame(
   MascotFrame frame, {
   MascotSurface surface = MascotSurface.light,
   Object? background,
-  MascotSpec? spec,
+  MascotStates? spec,
 }) {
-  final sp = spec ?? MascotSpec.instance;
+  final sp = spec ?? MascotStates.instance;
   final c = sp.surfaces[surface]!;
   final w = sp.canvasWidth;
   final h = sp.canvasHeight;
@@ -49,7 +49,7 @@ void _layer(
   MascotColors c,
   MascotLayer layer,
   MascotFrame frame,
-  MascotSpec sp,
+  MascotStates sp,
 ) {
   switch (layer) {
     case ActorLayer(:final actor):
@@ -117,7 +117,7 @@ void _prim(
   MascotColors c,
   Prim p,
   MascotFrame frame,
-  MascotSpec sp,
+  MascotStates sp,
 ) {
   canvas.save();
   _applyTransform(canvas, p.transform);
@@ -268,7 +268,7 @@ void _actor(
   MascotColors c,
   MascotActor a,
   MascotPose p,
-  MascotSpec sp,
+  MascotStates sp,
 ) {
   final s = a.s;
   final shadow = c['shadow'];

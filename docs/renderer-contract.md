@@ -397,6 +397,12 @@ painted at 4x and box-filtered to 480 px at the default tolerances (this checks 
 painted straight at 480 px with only `--tol-max` raised (Flutter: 112; mean and pixel share stay
 at their defaults). Evidence and numbers: `docs/flutter.md`.
 
+Static mode: `npm run parity:web:static` writes `tests/parity/web-static/*.png` and
+`tests/parity/manifest-static.json`, the resting pose of all 85 states on both surfaces (170 cases) from the web
+static entry (`renderRestSvg`), on the `card` colour of the case's surface. A port renders the same manifest with
+its static widget and compares under the same rules. The static output must equal the resting frame of the
+animated player (section 9.1, `rest` phase), which `tests/static.test.mjs` asserts string for string.
+
 ## 12. Reserved for later (format 1 players ignore these)
 
 - A prop primitive may carry `"track": "<name>"`, and a clip may carry `props: { "<name>": { fields,
@@ -408,6 +414,8 @@ at their defaults). Evidence and numbers: `docs/flutter.md`.
 
 ## Changes
 
+- 2026-10-08, section 11: added the static mode of the parity harness (resting pose only, both surfaces).
+  No change to the algorithm, the web player or `spec/`.
 - 2026-10-08, section 11: added how a port whose rasteriser anti-aliases more coarsely than
   `rsvg-convert` is compared (4x box-filtered at the default tolerances, plus straight 480 px with
   only `--tol-max` raised). No change to the algorithm, the web player or `spec/`.

@@ -1,0 +1,858 @@
+{
+ "format": 1,
+ "note": "Static mode. Render each case with BuddyStatic at size x size px on the palette token \"card\" of the case's surface (the widget itself is transparent). 85 states, light and dark.",
+ "size": 480,
+ "background": "card",
+ "cases": [
+  {
+   "file": "static-light-01-hello.png",
+   "state": "hello",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-02-welcome-team.png",
+   "state": "welcome-team",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-03-setup-event.png",
+   "state": "setup-event",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-04-all-set.png",
+   "state": "all-set",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-05-no-events.png",
+   "state": "no-events",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-06-no-songs.png",
+   "state": "no-songs",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-07-no-team.png",
+   "state": "no-team",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-08-no-notifications.png",
+   "state": "no-notifications",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-09-no-results.png",
+   "state": "no-results",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-10-no-sunday.png",
+   "state": "no-sunday",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-11-event-created.png",
+   "state": "event-created",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-12-saved.png",
+   "state": "saved",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-13-invite-sent.png",
+   "state": "invite-sent",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-14-everyone-confirmed.png",
+   "state": "everyone-confirmed",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-15-plan-ready.png",
+   "state": "plan-ready",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-16-done.png",
+   "state": "done",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-17-rehearsal.png",
+   "state": "rehearsal",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-18-scheduled.png",
+   "state": "scheduled",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-19-waiting.png",
+   "state": "waiting",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-20-declined.png",
+   "state": "declined",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-21-unavailable.png",
+   "state": "unavailable",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-22-new-message.png",
+   "state": "new-message",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-23-offline.png",
+   "state": "offline",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-24-oops.png",
+   "state": "oops",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-25-no-access.png",
+   "state": "no-access",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-26-loading.png",
+   "state": "loading",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-27-session-expired.png",
+   "state": "session-expired",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-28-happy.png",
+   "state": "happy",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-29-thinking.png",
+   "state": "thinking",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-30-surprised.png",
+   "state": "surprised",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-31-proud.png",
+   "state": "proud",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-32-sleepy.png",
+   "state": "sleepy",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-33-sure.png",
+   "state": "sure",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-34-idle.png",
+   "state": "idle",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-35-excited.png",
+   "state": "excited",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-36-thankful.png",
+   "state": "thankful",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-37-wink.png",
+   "state": "wink",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-38-confused.png",
+   "state": "confused",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-39-sad.png",
+   "state": "sad",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-40-shy.png",
+   "state": "shy",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-41-talking.png",
+   "state": "talking",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-42-shrug.png",
+   "state": "shrug",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-43-goodbye.png",
+   "state": "goodbye",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-44-welcome-back.png",
+   "state": "welcome-back",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-45-nervous.png",
+   "state": "nervous",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-46-focused.png",
+   "state": "focused",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-47-laughing.png",
+   "state": "laughing",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-48-curious.png",
+   "state": "curious",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-49-determined.png",
+   "state": "determined",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-50-on-it.png",
+   "state": "on-it",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-51-sorry.png",
+   "state": "sorry",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-52-peek.png",
+   "state": "peek",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-53-pointing.png",
+   "state": "pointing",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-54-pointup.png",
+   "state": "pointup",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-55-pointdown.png",
+   "state": "pointdown",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-56-pointleft.png",
+   "state": "pointleft",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-57-thumbsup.png",
+   "state": "thumbsup",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-58-clapping.png",
+   "state": "clapping",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-59-highfive.png",
+   "state": "highfive",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-60-running.png",
+   "state": "running",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-61-reading.png",
+   "state": "reading",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-62-planning.png",
+   "state": "planning",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-63-phone.png",
+   "state": "phone",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-64-laptop.png",
+   "state": "laptop",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-65-carrying.png",
+   "state": "carrying",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-66-sign.png",
+   "state": "sign",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-67-megaphone.png",
+   "state": "megaphone",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-68-reminder.png",
+   "state": "reminder",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-69-lost.png",
+   "state": "lost",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-70-maintenance.png",
+   "state": "maintenance",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-71-idea.png",
+   "state": "idea",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-72-slides.png",
+   "state": "slides",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-73-swap.png",
+   "state": "swap",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-74-qrcode.png",
+   "state": "qrcode",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-75-link.png",
+   "state": "link",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-76-new-feature.png",
+   "state": "new-feature",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-77-export.png",
+   "state": "export",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-78-listening.png",
+   "state": "listening",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-79-singing.png",
+   "state": "singing",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-80-playing.png",
+   "state": "playing",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-81-keyboard.png",
+   "state": "keyboard",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-82-drums.png",
+   "state": "drums",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-83-mixing.png",
+   "state": "mixing",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-84-transpose.png",
+   "state": "transpose",
+   "surface": "light"
+  },
+  {
+   "file": "static-light-85-setlist.png",
+   "state": "setlist",
+   "surface": "light"
+  },
+  {
+   "file": "static-dark-01-hello.png",
+   "state": "hello",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-02-welcome-team.png",
+   "state": "welcome-team",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-03-setup-event.png",
+   "state": "setup-event",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-04-all-set.png",
+   "state": "all-set",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-05-no-events.png",
+   "state": "no-events",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-06-no-songs.png",
+   "state": "no-songs",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-07-no-team.png",
+   "state": "no-team",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-08-no-notifications.png",
+   "state": "no-notifications",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-09-no-results.png",
+   "state": "no-results",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-10-no-sunday.png",
+   "state": "no-sunday",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-11-event-created.png",
+   "state": "event-created",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-12-saved.png",
+   "state": "saved",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-13-invite-sent.png",
+   "state": "invite-sent",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-14-everyone-confirmed.png",
+   "state": "everyone-confirmed",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-15-plan-ready.png",
+   "state": "plan-ready",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-16-done.png",
+   "state": "done",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-17-rehearsal.png",
+   "state": "rehearsal",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-18-scheduled.png",
+   "state": "scheduled",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-19-waiting.png",
+   "state": "waiting",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-20-declined.png",
+   "state": "declined",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-21-unavailable.png",
+   "state": "unavailable",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-22-new-message.png",
+   "state": "new-message",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-23-offline.png",
+   "state": "offline",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-24-oops.png",
+   "state": "oops",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-25-no-access.png",
+   "state": "no-access",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-26-loading.png",
+   "state": "loading",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-27-session-expired.png",
+   "state": "session-expired",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-28-happy.png",
+   "state": "happy",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-29-thinking.png",
+   "state": "thinking",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-30-surprised.png",
+   "state": "surprised",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-31-proud.png",
+   "state": "proud",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-32-sleepy.png",
+   "state": "sleepy",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-33-sure.png",
+   "state": "sure",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-34-idle.png",
+   "state": "idle",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-35-excited.png",
+   "state": "excited",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-36-thankful.png",
+   "state": "thankful",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-37-wink.png",
+   "state": "wink",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-38-confused.png",
+   "state": "confused",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-39-sad.png",
+   "state": "sad",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-40-shy.png",
+   "state": "shy",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-41-talking.png",
+   "state": "talking",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-42-shrug.png",
+   "state": "shrug",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-43-goodbye.png",
+   "state": "goodbye",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-44-welcome-back.png",
+   "state": "welcome-back",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-45-nervous.png",
+   "state": "nervous",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-46-focused.png",
+   "state": "focused",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-47-laughing.png",
+   "state": "laughing",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-48-curious.png",
+   "state": "curious",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-49-determined.png",
+   "state": "determined",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-50-on-it.png",
+   "state": "on-it",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-51-sorry.png",
+   "state": "sorry",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-52-peek.png",
+   "state": "peek",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-53-pointing.png",
+   "state": "pointing",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-54-pointup.png",
+   "state": "pointup",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-55-pointdown.png",
+   "state": "pointdown",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-56-pointleft.png",
+   "state": "pointleft",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-57-thumbsup.png",
+   "state": "thumbsup",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-58-clapping.png",
+   "state": "clapping",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-59-highfive.png",
+   "state": "highfive",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-60-running.png",
+   "state": "running",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-61-reading.png",
+   "state": "reading",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-62-planning.png",
+   "state": "planning",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-63-phone.png",
+   "state": "phone",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-64-laptop.png",
+   "state": "laptop",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-65-carrying.png",
+   "state": "carrying",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-66-sign.png",
+   "state": "sign",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-67-megaphone.png",
+   "state": "megaphone",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-68-reminder.png",
+   "state": "reminder",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-69-lost.png",
+   "state": "lost",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-70-maintenance.png",
+   "state": "maintenance",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-71-idea.png",
+   "state": "idea",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-72-slides.png",
+   "state": "slides",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-73-swap.png",
+   "state": "swap",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-74-qrcode.png",
+   "state": "qrcode",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-75-link.png",
+   "state": "link",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-76-new-feature.png",
+   "state": "new-feature",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-77-export.png",
+   "state": "export",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-78-listening.png",
+   "state": "listening",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-79-singing.png",
+   "state": "singing",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-80-playing.png",
+   "state": "playing",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-81-keyboard.png",
+   "state": "keyboard",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-82-drums.png",
+   "state": "drums",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-83-mixing.png",
+   "state": "mixing",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-84-transpose.png",
+   "state": "transpose",
+   "surface": "dark"
+  },
+  {
+   "file": "static-dark-85-setlist.png",
+   "state": "setlist",
+   "surface": "dark"
+  }
+ ]
+}

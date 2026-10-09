@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onstage_mascot/mascot.dart';
 import 'package:onstage_mascot/src/pose.dart';
-import 'package:onstage_mascot/src/spec_data.g.dart' as data;
+import 'package:onstage_mascot/src/motion_data.g.dart' as motion;
+import 'package:onstage_mascot/src/states_data.g.dart' as data;
 
 /// The bundled spec plus synthetic clips, so edge cases do not depend on baked data.
 MascotSpec _specWith(Map<String, Map<String, Object?>> clips) =>
@@ -11,7 +12,7 @@ MascotSpec _specWith(Map<String, Map<String, Object?>> clips) =>
       palette: data.paletteJson,
       states: data.statesJson,
       motion: {
-        ...data.motionJson,
+        ...motion.motionJson,
         for (final e in clips.entries) e.key: jsonEncode(e.value),
       },
     );

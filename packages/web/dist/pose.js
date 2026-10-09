@@ -1,4 +1,5 @@
 import { SPEC } from './spec-data.js';
+import { restPose } from './rest.js';
 const ADD = new Set(['x', 'y', 'tilt', 'edx', 'edy', 'mdx', 'mdy', 'footL', 'footR', 'footLRot', 'footRRot', 'aLang', 'aRang']);
 const MUL = new Set(['sx', 'sy', 'blink']);
 const DISCRETE_RE = /^(eyeL|eyeR|mouth)(Prev|Fade)?$/;
@@ -57,9 +58,7 @@ export function sampleClip(clip, t) {
     }
     return out;
 }
-export function restPose(p) {
-    return { ...p, eyeLPrev: null, eyeLFade: 1, eyeRPrev: null, eyeRFade: 1, mouthPrev: null, mouthFade: 1 };
-}
+export { restPose };
 /** Rest pose combined with a clip sample: absolute clips replace fields, additive clips offset them. */
 export function applySample(rest, clip, s) {
     const p = { ...restPose(rest) };

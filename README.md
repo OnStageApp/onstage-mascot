@@ -5,7 +5,7 @@ planning platform for churches; the mascot shows up in welcome, empty, success, 
 states (never on billing, payment or paywall screens, grief or prayer requests, or Live Mode).
 
 The mascot's real name is undecided. Working names live in one place, [`mascot.config.json`](mascot.config.json):
-repo `onstage-mascot`, npm package `@onstage/mascot`, Dart package `onstage_mascot`, component `Buddy`.
+repo `onstage-mascot`, npm package `@onstageapp/mascot`, Dart package `onstage_mascot`, component `Buddy`.
 To rename: `node tools/rename.mjs component=Pip npmName=@onstage/pip dartPackage=onstage_pip repo=onstage-pip`,
 then `npm run build && npm test` (`tests/names.test.mjs` checks everything agrees).
 
@@ -34,10 +34,13 @@ tools/
   lib/                    rig, path normaliser, SVG subset parser, sampler, JSON writer
   bake.mjs                spec from sources; import-generator.mjs (one-off import of the 85 states)
   render-svg.mjs, render-png.mjs, contact-sheet.mjs, serve.mjs, rename.mjs
-packages/web/             TypeScript player: renderFrameSvg, createPlayer, React <Buddy>
+  export-static.mjs       writes assets/
+packages/web/             TypeScript player: renderFrameSvg, createPlayer, React <Buddy>; static entry
   src/spec-data.ts        generated from spec/ (do not edit)
+  src/static-data.ts      generated, states only: what the static entry embeds
   dist/                   built ESM + .d.ts (checked in, so a git dependency needs no build)
-packages/flutter/         the Flutter player (next phase)
+packages/flutter/         the Flutter player: Buddy (animated) and BuddyStatic (static)
+assets/                   every state's resting pose as SVG and PNG (generated, checked in)
 examples/playground.html  every state, live, from the package build
 tests/                    node:test suites; parity/ harness for the Flutter port
 reports/                  bake-report.json (tolerances, sizes), rest-parity/
@@ -58,6 +61,8 @@ npm run preview         # then open http://localhost:5178/examples/playground.ht
 npm run contact-sheet   # out/contact-sheet.png; add -- --motion hello for a motion strip
 npm run render-png -- hello --phase motion --frame 20 --size 480
 npm run parity:web      # tests/parity/web/*.png + manifest.json for the Flutter comparison
+npm run parity:web:static  # the same for the static mode: tests/parity/web-static + manifest-static.json
+npm run export-static   # assets/: SVG (light, dark) and PNG (480 and 240 px) of every resting pose
 ```
 
 After editing `spec/states.json` or `spec/palette.json` by hand: `npm run bake && npm run build && npm test`.
@@ -69,12 +74,12 @@ delete it once spec/ has deliberately moved on from the generator.
 **Web (Next 16, React 19).** Install from a git tag:
 
 ```json
-"dependencies": { "@onstage/mascot": "github:OnStageApp/onstage-mascot#v0.1.0" }
+"dependencies": { "@onstageapp/mascot": "github:OnStageApp/onstage-mascot#v0.1.0" }
 ```
 
 ```tsx
-import { Buddy } from '@onstage/mascot/react';         // client component ('use client' inside)
-import { renderFrameSvg } from '@onstage/mascot';      // pure, server-safe
+import { Buddy } from '@onstageapp/mascot/react';         // client component ('use client' inside)
+import { renderFrameSvg } from '@onstageapp/mascot';      // pure, server-safe
 
 <Buddy state="no-events" size={160} onDone={() => setShowCta(true)} />
 ```
@@ -95,15 +100,79 @@ dependencies:
       path: packages/flutter
 ```
 
-The Flutter package embeds `spec/` as a generated Dart file (`lib/src/spec_data.g.dart`) and implements the same contract.
+The Flutter package embeds `spec/` as two generated Dart files (`lib/src/states_data.g.dart` and
+`lib/src/motion_data.g.dart`) and implements the same contract.
+
+## Static usage
+
+Every consumer does not need the animated player. The static option draws only the **resting pose**
+of a state: no timers, no motion data, no animation code. It is the same image as the resting frame
+of the animated player (tested for all 85 states on both surfaces, and against Flutter by the parity
+harness). Use it where animation is unwanted or heavy: empty states, long lists, emails, marketing
+pages, stickers, server-rendered pages and tiny bundles. Use the animated `Buddy` where the
+mascot is the moment (welcome, success, a screen that waits), and `reducedMotion` there already falls
+back to the same resting pose.
+
+**Web.**
+
+```tsx
+import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_INFO } from '@onstageapp/mascot/static';
+
+<BuddyStatic state="no-events" size={160} />                    // works in a React Server Component
+<BuddyStatic state="hello" surface="dark" title="Welcome" />
+<BuddyStatic state="oops" decorative />                         // purely decorative, hidden from assistive tech
+const svg = renderRestSvg('no-events', { surface: 'light', size: 120 });   // pure, server-safe string
+const src = restSvgDataUri('no-events', { size: 120 });                    // for <img src> and CSS url()
+```
+
+`@onstageapp/mascot/static` loads about 97 KB of JavaScript (14 KB gzipped) against about 207 KB (36 KB
+gzipped) for the full entry, because it embeds only the 85 states and none of the motion clips, the
+sampler, the player or the random source. `@onstageapp/mascot/static-svg` has the same string functions
+with no React at all (`renderRestSvg`, `restSvgDataUri`, `STATE_KEYS`, `STATE_INFO`), for scripts,
+email builders and other non-React code.
+
+**Flutter.**
+
+```dart
+import 'package:onstage_mascot/static.dart';
+
+const BuddyStatic(state: 'no-events', size: 160)
+BuddyStatic(state: 'hello', surface: MascotSurface.dark, semanticLabel: 'Welcome')
+```
+
+`BuddyStatic` is a stateless `CustomPaint` widget with no `Ticker`, `AnimationController` or timer,
+and `static.dart` imports only the states data, never the player or the motion clips. It paints with
+the same painter functions as `Buddy`. Details in [`docs/flutter.md`](docs/flutter.md).
+
+**Files, for emails, marketing, Framer and sticker packs.** `assets/` holds every state's resting pose,
+written by `npm run export-static` and checked in:
+
+```
+assets/svg/<key>.svg         light surface, vector (240 unit canvas)
+assets/svg-dark/<key>.svg    dark surface (no ground shadow)
+assets/png/<key>.png         480 px, transparent background, light surface
+assets/png/<key>@1x.png      240 px
+assets/index.json            key, group, name, use note and the paths above for every state
+```
+
+Through the package they are `@onstageapp/mascot/assets/png/hello.png` and so on. After a change to
+`spec/`, run `npm run bake && npm run build && npm run export-static`; `tests/static-assets.test.mjs`
+fails when the checked-in files are stale.
+
+**Accessibility.** The mascot is a picture, so it should say what it shows or say nothing. `BuddyStatic`
+(web) renders `role="img"` with `aria-label` set to the state's name (for example "No events yet"); pass
+`title` to describe it in your own words, `title=""` to hide it, or `decorative` to add `aria-hidden`
+when the text next to it already says everything. `BuddyStatic` (Flutter) wraps itself in `Semantics`
+with the state name as label; use `semanticLabel` to change it, `semanticLabel: ''` or
+`excludeFromSemantics: true` to leave it out. In the PNG and SVG files add the alt text yourself.
 
 ## Versioning
 
 Releases are git tags (`vMAJOR.MINOR.PATCH`), shared by both packages. Both apps pin a tag, so they
-can never drift apart. Release steps: `npm run bake && npm run build && npm test`, bump `version` in
-`package.json` (and `pubspec.yaml`), commit including `packages/web/dist`, tag, push the tag.
+can never drift apart. Release steps: `npm run bake && npm run build && npm run export-static && npm test`, bump `version` in
+`package.json` (and `pubspec.yaml`), commit including `packages/web/dist` and `assets/`, tag, push the tag.
 After `npm run bake`, also run `dart run tool/gen_spec_data.dart` and `node packages/flutter/tool/web-trace.mjs`
-(in `packages/flutter`) so the Flutter data and the blink trace match, then `packages/flutter/tool/parity.sh`.
+(in `packages/flutter`) so the Flutter data and the blink trace match, then `packages/flutter/tool/parity.sh` (it also runs the static mode).
 A breaking change to `spec/` bumps its `format` and the major version.
 
 ## Where things came from
