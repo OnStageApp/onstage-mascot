@@ -1,8 +1,7 @@
 {
-  "name": "@onstage/mascot",
-  "version": "0.1.0",
+  "name": "@onstageapp/mascot",
+  "version": "0.2.0",
   "description": "The OnStage mascot: spec data, baker and the web player.",
-  "private": true,
   "type": "module",
   "license": "UNLICENSED",
   "sideEffects": false,
@@ -58,5 +57,12 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnStageApp/onstage-mascot.git"
   }
 }

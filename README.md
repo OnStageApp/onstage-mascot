@@ -5,7 +5,7 @@ planning platform for churches; the mascot shows up in welcome, empty, success, 
 states (never on billing, payment or paywall screens, grief or prayer requests, or Live Mode).
 
 The mascot's real name is undecided. Working names live in one place, [`mascot.config.json`](mascot.config.json):
-repo `onstage-mascot`, npm package `@onstage/mascot`, Dart package `onstage_mascot`, component `Buddy`.
+repo `onstage-mascot`, npm package `@onstageapp/mascot`, Dart package `onstage_mascot`, component `Buddy`.
 To rename: `node tools/rename.mjs component=Pip npmName=@onstage/pip dartPackage=onstage_pip repo=onstage-pip`,
 then `npm run build && npm test` (`tests/names.test.mjs` checks everything agrees).
 
@@ -74,12 +74,12 @@ delete it once spec/ has deliberately moved on from the generator.
 **Web (Next 16, React 19).** Install from a git tag:
 
 ```json
-"dependencies": { "@onstage/mascot": "github:OnStageApp/onstage-mascot#v0.1.0" }
+"dependencies": { "@onstageapp/mascot": "github:OnStageApp/onstage-mascot#v0.1.0" }
 ```
 
 ```tsx
-import { Buddy } from '@onstage/mascot/react';         // client component ('use client' inside)
-import { renderFrameSvg } from '@onstage/mascot';      // pure, server-safe
+import { Buddy } from '@onstageapp/mascot/react';         // client component ('use client' inside)
+import { renderFrameSvg } from '@onstageapp/mascot';      // pure, server-safe
 
 <Buddy state="no-events" size={160} onDone={() => setShowCta(true)} />
 ```
@@ -116,7 +116,7 @@ back to the same resting pose.
 **Web.**
 
 ```tsx
-import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_INFO } from '@onstage/mascot/static';
+import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_INFO } from '@onstageapp/mascot/static';
 
 <BuddyStatic state="no-events" size={160} />                    // works in a React Server Component
 <BuddyStatic state="hello" surface="dark" title="Welcome" />
@@ -125,9 +125,9 @@ const svg = renderRestSvg('no-events', { surface: 'light', size: 120 });   // pu
 const src = restSvgDataUri('no-events', { size: 120 });                    // for <img src> and CSS url()
 ```
 
-`@onstage/mascot/static` loads about 97 KB of JavaScript (14 KB gzipped) against about 207 KB (36 KB
+`@onstageapp/mascot/static` loads about 97 KB of JavaScript (14 KB gzipped) against about 207 KB (36 KB
 gzipped) for the full entry, because it embeds only the 85 states and none of the motion clips, the
-sampler, the player or the random source. `@onstage/mascot/static-svg` has the same string functions
+sampler, the player or the random source. `@onstageapp/mascot/static-svg` has the same string functions
 with no React at all (`renderRestSvg`, `restSvgDataUri`, `STATE_KEYS`, `STATE_INFO`), for scripts,
 email builders and other non-React code.
 
@@ -155,7 +155,7 @@ assets/png/<key>@1x.png      240 px
 assets/index.json            key, group, name, use note and the paths above for every state
 ```
 
-Through the package they are `@onstage/mascot/assets/png/hello.png` and so on. After a change to
+Through the package they are `@onstageapp/mascot/assets/png/hello.png` and so on. After a change to
 `spec/`, run `npm run bake && npm run build && npm run export-static`; `tests/static-assets.test.mjs`
 fails when the checked-in files are stale.
 

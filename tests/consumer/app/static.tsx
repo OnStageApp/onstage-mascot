@@ -1,6 +1,6 @@
 // A server component using the static entry: no 'use client', no hooks.
-import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_KEYS, STATE_INFO, type BuddyStaticProps, type StateInfo } from '@onstage/mascot/static';
-import { renderRestSvg as pureSvg } from '@onstage/mascot/static-svg';
+import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_KEYS, STATE_INFO, type BuddyStaticProps, type StateInfo } from '@onstageapp/mascot/static';
+import { renderRestSvg as pureSvg } from '@onstageapp/mascot/static-svg';
 
 export function EmptyEventsStatic() {
   const props: BuddyStaticProps = { state: 'no-events', size: 160, surface: 'light', title: 'No events yet' };

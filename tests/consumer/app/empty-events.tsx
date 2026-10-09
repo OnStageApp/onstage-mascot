@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { Buddy, type BuddyProps } from '@onstage/mascot/react';
-import { createPlayer, type Player } from '@onstage/mascot';
+import { Buddy, type BuddyProps } from '@onstageapp/mascot/react';
+import { createPlayer, type Player } from '@onstageapp/mascot';
 
 export function EmptyEvents() {
   const [done, setDone] = useState(false);

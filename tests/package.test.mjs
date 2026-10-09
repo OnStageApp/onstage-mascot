@@ -21,7 +21,7 @@ test('ESM entry points import cleanly', async () => {
 
 test('the package resolves by name through its exports map', () => {
   const r = spawnSync(process.execPath, ['--input-type=module', '-e',
-    "const m = await import('@onstage/mascot'); const r = await import('@onstage/mascot/react'); console.log(typeof m.renderFrameSvg, typeof r.Buddy)"], { cwd: ROOT, encoding: 'utf8' });
+    "const m = await import('@onstageapp/mascot'); const r = await import('@onstageapp/mascot/react'); console.log(typeof m.renderFrameSvg, typeof r.Buddy)"], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(r.stdout.trim(), 'function function', r.stderr);
 });
 

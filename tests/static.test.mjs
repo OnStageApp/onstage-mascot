@@ -1,4 +1,4 @@
-// The static entry (@onstage/mascot/static): the resting pose of every state, with no player and no
+// The static entry (@onstageapp/mascot/static): the resting pose of every state, with no player and no
 // motion data. Proves it draws exactly what the animated player draws at rest, that it really does not
 // load the motion data, and that BuddyStatic works in a server component.
 import test from 'node:test';
@@ -99,7 +99,7 @@ test('static: size of the static entry against the full entry (raw and gzip)', (
   const row = (n, s) => `${n.padEnd(22)} ${String(s.files).padStart(2)} files  ${String(s.raw).padStart(7)} B raw  ${String(s.gzip).padStart(6)} B gzip`;
   console.log([
     'bundle-free dist sizes (every file the entry loads, concatenated):',
-    row('@onstage/mascot', full), row('@onstage/mascot/react', react), row('@onstage/mascot/static', stat), row('.../static-svg', pure),
+    row('@onstageapp/mascot', full), row('@onstageapp/mascot/react', react), row('@onstageapp/mascot/static', stat), row('.../static-svg', pure),
     `static is ${(100 * stat.raw / full.raw).toFixed(1)}% of the full entry raw, ${(100 * stat.gzip / full.gzip).toFixed(1)}% gzip`,
   ].join('\n'));
   assert.ok(stat.raw < full.raw * 0.6);
@@ -141,7 +141,7 @@ test('static: BuddyStatic renders in a server component (no client directive, no
 
 test('static: the entries resolve by package name; static-svg runs without React', () => {
   const r = spawnSync(process.execPath, ['--input-type=module', '-e',
-    "const s = await import('@onstage/mascot/static'); const v = await import('@onstage/mascot/static-svg'); console.log(typeof s.BuddyStatic, typeof s.renderRestSvg, typeof v.renderRestSvg, v.STATE_KEYS.length)"], { cwd: ROOT, encoding: 'utf8' });
+    "const s = await import('@onstageapp/mascot/static'); const v = await import('@onstageapp/mascot/static-svg'); console.log(typeof s.BuddyStatic, typeof s.renderRestSvg, typeof v.renderRestSvg, v.STATE_KEYS.length)"], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(r.stdout.trim(), 'function function function 85', r.stderr);
   // static-svg alone, with module resolution of react blocked: it must not need it.
   const hooks = `data:text/javascript,${encodeURIComponent("export async function resolve(s, c, n) { if (s.startsWith('react')) throw new Error('react is not available'); return n(s, c); }")}`;

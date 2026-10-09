@@ -1,4 +1,4 @@
-// @onstage/mascot: the web player. Framework-free core; the React component lives in ./react.
+// @onstageapp/mascot: the web player. Framework-free core; the React component lives in ./react.
 export type * from './types.js';
 export { SPEC } from './spec-data.js';
 export { renderFrameSvg, type FrameInfo, type RenderOptions } from './render.js';
