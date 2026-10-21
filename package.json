@@ -1,6 +1,6 @@
 {
   "name": "@onstageapp/mascot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The OnStage mascot: spec data, baker and the web player.",
   "type": "module",
   "license": "UNLICENSED",

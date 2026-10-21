@@ -24,7 +24,7 @@ const r3 = v => Math.round(v * 1000) / 1000;
 const DISC = ['eyeL', 'eyeR', 'mouth'];
 const ABS_FIELDS = [...NUM_FIELDS, ...DISC.flatMap(d => [d, d + 'Prev', d + 'Fade'])];
 export const ADD_FIELDS = ['x', 'y', 'tilt', 'edx', 'edy', 'mdx', 'mdy', 'footL', 'footR', 'footLRot', 'footRRot', 'aLang', 'aRang'];
-export const MUL_FIELDS = ['sx', 'sy', 'blink'];
+export const MUL_FIELDS = ['sx', 'sy', 'blink', 'shadow'];
 const ARM_GEOM = s => ['x', 'y', 'ang', 'len', 'thumb'].map(f => 'a' + s + f);
 
 // ---------- rig runs ----------
@@ -38,6 +38,7 @@ function maxDiff(a, b, { ignoreArmsOf } = {}) {
     if (f === 'tilt') d = Math.abs(((a[f] - b[f]) % 360 + 540) % 360 - 180);
     m = Math.max(m, d);
   }
+  if ('shadow' in a && 'shadow' in b) m = Math.max(m, Math.abs(a.shadow - b.shadow));
   return m;
 }
 function settled(out, rest) {
@@ -133,7 +134,7 @@ function encode(id, def, run, fields) {
 // ---------- tolerance: interpolated 30 fps against the 60 fps rig ----------
 const POS = ['x', 'y', 'edx', 'edy', 'mw', 'mdx', 'mdy', 'footL', 'footR'];
 const ANG = ['tilt', 'footLRot', 'footRRot'];
-const SCL = ['sx', 'sy', 'blink'];
+const SCL = ['sx', 'sy', 'blink', 'shadow'];
 const weights = (ty, pv, fd) => (pv == null || fd >= 1 ? { [ty]: 1 } : { [ty]: fd, [pv]: (1 - fd) + (pv === ty ? fd : 0) });
 export function measure(clip, frames60, view = p => p, sampler = sample) {
   const e = { pos: 0, ang: 0, scale: 0, presence: 0, opacity: 0 }, where = {};
@@ -184,7 +185,7 @@ export function bakeAll(statesDoc) {
       run = def.loop ? runLoop(def, rest, targetAt, { intro: true }) : runOnce(def, rest, targetAt);
       clip = encode(id, def, run, ABS_FIELDS);
     } else {
-      const n = neutralPose();
+      const n = { ...neutralPose(), shadow: 1 };
       const touched = new Set();
       for (let t = 0; t <= (def.dur || def.period); t += 0.05) Object.keys(def.target(t)).forEach(k => touched.add(k));
       const fields = [...ADD_FIELDS, ...MUL_FIELDS].filter(f => touched.has(f));

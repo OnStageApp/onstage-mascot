@@ -13,9 +13,21 @@ export declare function sampleClip(clip: Clip, t: number): Sample;
 export { restPose };
 /** Rest pose combined with a clip sample: absolute clips replace fields, additive clips offset them. */
 export declare function applySample(rest: Pose, clip: Clip, s: Sample): Pose;
+/** Offsets a pose in place by an additive clip sample (contract section 8) and returns it. */
+export declare function addSample(pose: Pose, s: Sample): Pose;
+/** A clip that can be played on top of any pose (player.playClip), or an error. */
+export declare function getOverlayClip(id: string): Clip;
+/** The ids of the one-shot additive clips playClip accepts, in spec order. */
+export declare function overlayClipIds(): string[];
 export declare function getState(key: string): StateDef;
 /** The clip a phase plays for a state, or null for the rest phase. */
 export declare function clipFor(state: StateDef, phase: Phase): Clip | null;
-/** Every actor's pose at time t of a phase. blink: per-actor factor on eye height (1 = open). */
-export declare function resolvePoses(state: StateDef, phase: Phase, t: number, blink?: readonly number[]): Pose[];
+/** An additive clip played on top of the phase's poses, at time t into the clip (see player.playClip). */
+export interface Overlay {
+    clip: Clip;
+    t: number;
+}
+/** Every actor's pose at time t of a phase. blink: per-actor factor on eye height (1 = open).
+ *  overlay: an additive clip applied to every actor after the phase's own clip. */
+export declare function resolvePoses(state: StateDef, phase: Phase, t: number, blink?: readonly number[], overlay?: Overlay | null): Pose[];
 export type { EyeType, MouthType };

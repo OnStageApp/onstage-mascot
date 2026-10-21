@@ -9,7 +9,7 @@ rectangles, ellipses, circles and paths. It never runs springs, easing or physic
 
 Contents: 1 Units and canvas. 2 Data the player reads. 3 Scene drawing. 4 Actor (the character).
 5 Props. 6 Paint rules. 7 Sampling a clip. 8 Combining a clip with the rest pose. 9 Player
-(phases, blink, idle, reduced motion, pausing). 10 Random source. 11 Parity. 12 Reserved for later.
+(phases, blink, idle, reduced motion, pausing, extra clips). 10 Random source. 11 Parity. 12 Reserved for later.
 
 Pseudocode conventions: angles in degrees unless noted; `rad(a) = a * pi / 180`; `lerp(a, b, k) = a + (b - a) * k`;
 `floor` rounds toward negative infinity; `%` on non-negative numbers is the ordinary remainder.
@@ -45,6 +45,8 @@ footL footR footLRot footRRot          foot lift (body units, up is positive), f
 aL aLx aLy aLang aLlen aLthumb         left arm: presence 0..1, anchor, angle (deg), length, thumb flag
 aR aRx aRy aRang aRlen aRthumb         right arm, same
 fold badge                             flags (0 or 1): page-fold tile, lanyard clip on the head
+shadow                                 ground shadow size factor; absent (= 1) in rest poses, set only by
+                                       additive clips (hop)
 eyeLPrev eyeLFade eyeRPrev eyeRFade mouthPrev mouthFade
                                        crossfade state; a rest pose has Prev = null, Fade = 1
 ```
@@ -69,14 +71,15 @@ some in front).
 
 ```
 if actor.shadow and C.shadow != null:
-  lift = max(0, -P.y)
+  lift = max(0, -P.y);  k = P.shadow (1 when absent)
   ellipse centre (actor.cx + P.x * s, ground + 6.5 * s)
-          rx = 27 * s * P.sx / (1 + lift / 30)
-          ry = 3.4 * s
+          rx = 27 * s * P.sx * k / (1 + lift / 30)
+          ry = 3.4 * s * k
           fill C.shadow
 ```
 
-The shadow does not follow `y` (it stays on the ground) and shrinks as Buddy rises. On the dark
+The shadow does not follow `y` (it stays on the ground) and shrinks as Buddy rises; `k` shrinks it
+further (the `hop` clip takes it to about 0.88 at the top). On the dark
 surface the shadow token is null, so nothing is drawn.
 
 ### 4.2 Transform
@@ -281,9 +284,12 @@ Start from the actor's rest pose with `Prev = null`, `Fade = 1`. Then:
 
 - `kind: "absolute"` (bespoke clips): every field in the sample replaces the rest value. Fields the
   clip does not carry (`fold`, `badge`) stay as at rest.
-- `kind: "additive"` (pop, idle, blink): for each field in the sample,
+- `kind: "additive"` (pop, idle, blink, hop, glance-left, glance-right, look-around): for each field in the sample,
   - add: `x y tilt edx edy mdx mdy footL footR footLRot footRRot aLang aRang` -> `pose[f] += v`
-  - multiply: `sx sy blink` -> `pose[f] *= v`
+  - multiply: `sx sy blink shadow` -> `pose[f] *= v` (a pose without `shadow` counts it as 1)
+  - any other field: ignore it
+- An additive clip may also be applied to a pose that is not a rest pose (an extra clip, 9.6), with the
+  same rules.
 
 Finally multiply `pose.blink` by the actor's blink factor (section 9; 1 when not blinking).
 
@@ -364,6 +370,37 @@ no motion, no idle, no blinks. Switching it on mid-play jumps to rest; switching
 Stop ticking while the page or app is hidden (web: `visibilitychange`; Flutter: app lifecycle not
 `resumed`, or `TickerMode` off). On resume, the next dt is 0 (no catch-up).
 
+### 9.6 Extra clips (playClip) and ambient clips
+
+An extra clip is a one-shot additive clip (`hop`, `glance-left`, `glance-right`, `look-around`; never
+`blink` or a loop) played on top of whatever the phase shows, on its own clock `ct`:
+
+```
+playClip(id, then = "idle", onDone):
+  if reducedMotion: call onDone asynchronously; return
+  extra = (clip id, ct = 0, then, onDone)     -- replaces an extra clip already playing, whose onDone is not called
+  render; start the frame loop (also in the rest phase)
+
+tick(dt), after the phase step of 9.2:
+  if extra: ct += clamp(dt, 0, 0.1)
+            if ct >= extra.duration: done = extra; extra = none
+                                     if done.then == "idle" and phase == rest: enterIdle()
+                                     call done.onDone
+  if ambient and phase == idle and no extra and t >= ambientNext:
+    pick one of ambient.clips with ambientRandom(); start it as an extra clip (then "idle", no onDone)
+    ambientNext = t + its duration + ambientGap()
+
+poses: resolve the phase as in 9.1, then for every actor combine(pose, sample(extra, ct)) by the
+       additive rules of section 8, then multiply blink by the blink factor
+```
+
+`ambientGap() = gapMin + (gapMax - gapMin) * ambientRandom()` (defaults 6 and 10 seconds). `enterIdle`
+also sets `ambientNext = t + ambientGap()`. The ambient source is separate from the blink source, so the
+blink schedule of 9.3 is the same with or without extra clips. `start` (play, setState) drops the extra
+clip without calling its onDone; reduced motion switching on drops it and calls onDone. Under reduced
+motion there are no ambient clips. The frame loop keeps running while an extra clip plays.
+Flutter has the clips in its data but no `playClip` yet (see `docs/flutter.md`).
+
 ## 10. Random source
 
 Players take an injectable `random(): double in [0, 1)`; production may use the platform default.
@@ -413,6 +450,11 @@ animated player (section 9.1, `rest` phase), which `tests/static.test.mjs` asser
 - Unknown top-level keys in any spec file must be ignored, not rejected.
 
 ## Changes
+
+- 2026-10-21 (0.3.0), sections 2, 4.1, 8 and 9.6: added the additive clips `hop`, `glance-left`,
+  `glance-right` and `look-around`, the optional `shadow` pose field (ground shadow size factor, absent =
+  1, so rest poses and every older clip draw exactly as before) and extra clips (`playClip`, ambient).
+  Web player implements all of it; Flutter implements `shadow` and carries the clips, not `playClip`.
 
 - 2026-10-08, section 11: added the static mode of the parity harness (resting pose only, both surfaces).
   No change to the algorithm, the web player or `spec/`.

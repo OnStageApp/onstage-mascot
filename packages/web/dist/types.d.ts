@@ -84,6 +84,8 @@ export interface Pose {
     aRthumb: number;
     fold: number;
     badge: number;
+    /** Ground shadow size factor (1 when absent). Only additive clips set it; rest poses never carry it. */
+    shadow?: number;
     eyeLPrev?: EyeType | null;
     eyeLFade?: number;
     eyeRPrev?: EyeType | null;

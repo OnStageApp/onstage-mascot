@@ -1,7 +1,7 @@
 export { SPEC } from './spec-data.js';
 export { renderFrameSvg } from './render.js';
 export { createPlayer } from './player.js';
-export { resolvePoses, sampleClip, locate, mixDiscrete, applySample, restPose, getState, clipFor } from './pose.js';
+export { resolvePoses, sampleClip, locate, mixDiscrete, applySample, addSample, restPose, getState, clipFor, getOverlayClip, overlayClipIds } from './pose.js';
 export { drawScene } from './svg.js';
 export { mulberry32 } from './rng.js';
 import { SPEC } from './spec-data.js';

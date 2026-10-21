@@ -1,5 +1,7 @@
 // npm run contact-sheet                      every state's rest pose, grouped, labelled -> out/contact-sheet.png
 // npm run contact-sheet -- --motion <state>  that state's motion, every --step frames (default 4)
+// npm run contact-sheet -- --clip <id>      an additive clip (hop, glance-left, ...) on top of a state's idle
+//                                            (--state, default excited), every --step frames (default 2)
 // Options: --surface dark, --cols 8, --cell 160, --out file.png
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,7 +15,11 @@ const bg = surface === 'dark' ? P.navy : '#FFFFFF', ink = surface === 'dark' ? '
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 let items;
-if (a.motion) {
+if (a.clip) {
+  const key = a.state || 'excited', clip = web.getOverlayClip(a.clip), step = +(a.step || 2);
+  items = [];
+  for (let f = 0; f < clip.frames; f += step) items.push({ key, frame: { phase: 'idle', t: 0, overlay: { clip: a.clip, t: f / clip.fps } }, title: `${a.clip} ${f}`, sub: `${(f / clip.fps).toFixed(2)} s` });
+} else if (a.motion) {
   const st = web.getState(a.motion), clip = web.SPEC.motion[st.motion.id], step = +(a.step || 4);
   items = [];
   for (let f = 0; f < clip.frames; f += step) items.push({ key: st.key, frame: { phase: 'motion', frame: f }, title: `frame ${f}`, sub: `${(f / clip.fps).toFixed(2)} s` });
@@ -31,7 +37,8 @@ items.forEach((it, i) => {
     + `<text x="${x + 2}" y="${y + cell + 30}" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="11" fill="${ink}" opacity="0.6">${esc(it.sub)}</text>`;
 });
 const sheet = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="${bg}"/>${body}</svg>`;
-const out = a.out || path.join(ROOT, 'out', a.motion ? `motion-${a.motion}${surface === 'dark' ? '-dark' : ''}.png` : `contact-sheet${surface === 'dark' ? '-dark' : ''}.png`);
+const name = a.clip ? `clip-${a.clip}` : a.motion ? `motion-${a.motion}` : 'contact-sheet';
+const out = a.out || path.join(ROOT, 'out', `${name}${surface === 'dark' ? '-dark' : ''}.png`);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 execFileSync(RSVG, ['-o', out], { input: sheet });
 console.log(out);

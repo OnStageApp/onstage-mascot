@@ -9,8 +9,8 @@
   },
   "sizes": {
     "motion": {
-      "rawKB": 98.5,
-      "gzipKB": 19
+      "rawKB": 105.2,
+      "gzipKB": 20.4
     },
     "states": {
       "rawKB": 120.6,
@@ -21,8 +21,8 @@
       "gzipKB": 0.4
     },
     "motionPlusStates": {
-      "rawKB": 219.1,
-      "gzipKB": 29.6
+      "rawKB": 225.8,
+      "gzipKB": 30.9
     }
   },
   "clips": {
@@ -223,6 +223,50 @@
       "constants": 0,
       "endResidual": 6.05e-7,
       "interpolationError": {"pos":0,"ang":0,"scale":0.0704,"presence":0,"opacity":0,"worstField":{"scale":"blink"}}
+    },
+    "hop": {
+      "kind": "additive",
+      "plays": "once",
+      "new": true,
+      "frames": 25,
+      "duration": 0.8,
+      "fields": 4,
+      "constants": 0,
+      "endResidual": 0.0000914,
+      "interpolationError": {"pos":0.105,"ang":0,"scale":0.00778,"presence":0,"opacity":0,"worstField":{"scale":"sy","pos":"y"}}
+    },
+    "glance-left": {
+      "kind": "additive",
+      "plays": "once",
+      "new": true,
+      "frames": 49,
+      "duration": 1.6,
+      "fields": 4,
+      "constants": 0,
+      "endResidual": 0.0000623,
+      "interpolationError": {"pos":0.0376,"ang":0.00918,"scale":0.0384,"presence":0,"opacity":0,"worstField":{"pos":"edx","ang":"tilt","scale":"blink"}}
+    },
+    "glance-right": {
+      "kind": "additive",
+      "plays": "once",
+      "new": true,
+      "frames": 49,
+      "duration": 1.6,
+      "fields": 4,
+      "constants": 0,
+      "endResidual": 0.0000623,
+      "interpolationError": {"pos":0.0376,"ang":0.00918,"scale":0.0384,"presence":0,"opacity":0,"worstField":{"pos":"edx","ang":"tilt","scale":"blink"}}
+    },
+    "look-around": {
+      "kind": "additive",
+      "plays": "once",
+      "new": true,
+      "frames": 79,
+      "duration": 2.6,
+      "fields": 4,
+      "constants": 0,
+      "endResidual": 0.0000678,
+      "interpolationError": {"pos":0.0376,"ang":0.00965,"scale":0.0681,"presence":0,"opacity":0,"worstField":{"pos":"edx","ang":"tilt","scale":"blink"}}
     }
   }
 }

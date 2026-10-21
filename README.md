@@ -85,9 +85,25 @@ import { renderFrameSvg } from '@onstageapp/mascot';      // pure, server-safe
 ```
 
 `Buddy` props: `state`, `surface` (`light` | `dark`), `size`, `playOnMount`, `onDone`, `reducedMotion`
-(undefined follows `prefers-reduced-motion`), `label`, `className`, `style`. It server-renders the
+(undefined follows `prefers-reduced-motion`), `label`, `className`, `style`, `ambient`, `ref`. It server-renders the
 resting pose, plays the state's motion once, idles with random blinks, and pauses while the tab is
 hidden. Framework-free: `createPlayer({ state, target })`. React is an optional peer dependency.
+
+**Extra clips (0.3.0).** `hop`, `glance-left`, `glance-right` and `look-around` are additive one-shots
+that play on top of any state, then the mascot carries on (idle by default). Reduced motion turns them off.
+
+```tsx
+const buddy = useRef<BuddyHandle>(null);                     // ref is a prop: React 19
+<Buddy ref={buddy} state="excited" ambient={{ clips: ['hop', 'glance-left', 'glance-right'] }} />
+buddy.current?.playClip('hop', { onDone: () => {} });       // { then: 'idle' | null, onDone }
+
+const p = createPlayer({ state: 'excited', target: el, ambient: { clips: ['hop'], gapMin: 6, gapMax: 10 } });
+p.playClip('look-around');  p.setAmbient(null);
+renderFrameSvg('excited', { phase: 'idle', t: 0, overlay: { clip: 'hop', t: 0.3 } });   // one frame, pure
+```
+
+`ambient` plays one of `clips` after every 6 to 10 seconds of idle (`gapMin`, `gapMax`, optional `random`).
+See them in the playground (buttons under the stage) or as a strip: `npm run contact-sheet -- --clip hop`.
 
 **Flutter.** Dart git dependency on the same tag:
 

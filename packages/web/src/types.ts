@@ -49,6 +49,8 @@ export interface Pose {
   aL: number; aLx: number; aLy: number; aLang: number; aLlen: number; aLthumb: number;
   aR: number; aRx: number; aRy: number; aRang: number; aRlen: number; aRthumb: number;
   fold: number; badge: number;
+  /** Ground shadow size factor (1 when absent). Only additive clips set it; rest poses never carry it. */
+  shadow?: number;
   eyeLPrev?: EyeType | null; eyeLFade?: number;
   eyeRPrev?: EyeType | null; eyeRFade?: number;
   mouthPrev?: MouthType | null; mouthFade?: number;
