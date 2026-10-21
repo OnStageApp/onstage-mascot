@@ -274,11 +274,12 @@ void _actor(
   final shadow = c['shadow'];
   if (a.shadow && shadow != null) {
     final lift = math.max(0, -p['y']);
+    final k = p.values['shadow'] ?? 1;
     canvas.drawOval(
       Rect.fromCenter(
         center: Offset(a.cx + p['x'] * s, sp.ground + 6.5 * s),
-        width: 2 * (27 * s * p['sx'] / (1 + lift / 30)),
-        height: 2 * (3.4 * s),
+        width: 2 * (27 * s * p['sx'] * k / (1 + lift / 30)),
+        height: 2 * (3.4 * s * k),
       ),
       _fill(shadow),
     );

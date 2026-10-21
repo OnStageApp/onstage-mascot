@@ -155,8 +155,8 @@ function actorSvg(c: Colors, ground: number, state: DrawState, i: number, p: Pos
   let out = '';
   const shadow = color(c, 'shadow');
   if (a.shadow && shadow != null) {
-    const lift = Math.max(0, -p.y);
-    out += `<ellipse cx="${n(a.cx + p.x * s)}" cy="${n(ground + 6.5 * s)}" rx="${n(27 * s * p.sx / (1 + lift / 30))}" ry="${n(3.4 * s)}" fill="${shadow}"/>`;
+    const lift = Math.max(0, -p.y), k = p.shadow ?? 1;
+    out += `<ellipse cx="${n(a.cx + p.x * s)}" cy="${n(ground + 6.5 * s)}" rx="${n(27 * s * p.sx * k / (1 + lift / 30))}" ry="${n(3.4 * s * k)}" fill="${shadow}"/>`;
   }
   out += `<g transform="translate(${n(a.cx - 32 * s + p.x * s)} ${n(a.by - 54 * s + p.y * s)}) scale(${n(s)})">`
     + `<g transform="rotate(${n(p.tilt)} 32 27) translate(32 54) scale(${n(p.sx)} ${n(p.sy)}) translate(-32 -54)">`

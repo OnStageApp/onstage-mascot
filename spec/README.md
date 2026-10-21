@@ -71,7 +71,8 @@ onCoral (ink on coral, navy today), mint #8FD6B5, white, card.
 - Eye and mouth tracks are three columns each: type index, previous type index (-1 for none) and
   crossfade 0..1, against the clip's `eyeTypes` / `mouthTypes` tables.
 - `kind: "absolute"`: a full pose for the actor (bespoke clips; first and last frames equal the rest pose).
-  `kind: "additive"`: offsets on top of any rest pose (`pop`, `idle`, `blink`).
+  `kind: "additive"`: offsets on top of any rest pose (`pop`, `idle`, `blink`, and the extra clips below).
+  Additive clips may carry `shadow`, a factor on the ground shadow's size (1 when absent).
 - `loop: true`: rows `[0, introFrames)` play once from rest, then rows `[introFrames, frames)` repeat.
 - `source`: how the clip was made, for people.
 - `props`: reserved for animated prop tracks (empty in format 1).
@@ -88,6 +89,12 @@ linear interpolation of the 30 fps rows strays from the 60 fps rig, per clip.
 | `blink` | additive | once (scheduled by the player) | idle |
 | `hello`, `welcome-team`, `all-set`, `no-events`, `no-results`, `event-created`, `invite-sent`, `plan-ready`, `done`, `waiting`, `offline`, `oops`, `session-expired`, `sleepy` | absolute | once | the state with the same key |
 | `loading` | absolute | loop (1.6 s, with intro) | loading (all three Buddies, a third of a hop apart) |
+| `hop` | additive | once (0.6 s, settled by 0.8 s) | extra clip: about 6 body units up (12 px at a 220 px render), squash and stretch, shadow shrinks on the ground |
+| `glance-left`, `glance-right` | additive | once (1.4 s, settled by 1.6 s) | extra clip: eyes 4 body units to the side and a little up, head tilt 1.5, half blink at the turn |
+| `look-around` | additive | once (2.4 s, settled by 2.6 s) | extra clip: left, blink at the centre, right, back |
+
+Extra clips belong to no state: a player plays them on demand (`player.playClip(id)`) or now and then
+while idling (the `ambient` option); see `docs/renderer-contract.md` section 9.6.
 
 ## Versioning
 

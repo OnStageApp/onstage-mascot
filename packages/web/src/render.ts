@@ -1,5 +1,5 @@
 import type { Surface } from './types.js';
-import { clipFor, getState, resolvePoses, type Phase } from './pose.js';
+import { clipFor, getOverlayClip, getState, resolvePoses, type Phase } from './pose.js';
 import { drawScene } from './svg.js';
 
 export interface FrameInfo {
@@ -11,6 +11,8 @@ export interface FrameInfo {
   frame?: number;
   /** Per-actor blink factor, 1 = open. */
   blink?: readonly number[];
+  /** An additive clip (hop, glance-left, glance-right, look-around) on top of the phase, t seconds into it. */
+  overlay?: { clip: string; t: number };
 }
 
 export interface RenderOptions {
@@ -27,5 +29,6 @@ export function renderFrameSvg(stateKey: string, frame: FrameInfo = {}, opts: Re
   const phase = frame.phase ?? 'rest';
   const clip = clipFor(state, phase);
   const t = frame.t ?? (frame.frame != null && clip ? frame.frame / clip.fps : 0);
-  return drawScene(state, resolvePoses(state, phase, t, frame.blink), opts);
+  const overlay = frame.overlay ? { clip: getOverlayClip(frame.overlay.clip), t: frame.overlay.t } : null;
+  return drawScene(state, resolvePoses(state, phase, t, frame.blink, overlay), opts);
 }

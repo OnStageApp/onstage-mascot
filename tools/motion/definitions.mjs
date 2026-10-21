@@ -4,6 +4,7 @@
 // Bespoke clips are "absolute": they return a full pose (tools/lib/pose.mjs) for the state's first actor,
 // starting from and settling back to that actor's rest pose. Shared clips (pop, idle, blink) are
 // "additive": they return offsets around the neutral pose, applied on top of any state's rest pose.
+// Additive clips may also carry `shadow`, a factor on the ground shadow's size (1 when absent).
 // Units: body units for positions, degrees for angles. Engine actions are in canvas units at scale 3
 // and are converted by fromEngine().
 import { loadEngine } from '../lib/sources.mjs';
@@ -190,4 +191,50 @@ export const MOTIONS = {
     source: 'engine withBlink shape (140 ms), smoothed by the rig; a factor on eye height',
     target: t => ({ blink: blinkAt(t) }),
   },
+
+  // ---------- extra, additive (played on demand with player.playClip, or by the ambient schedule) ----------
+  // No state plays these on its own. Sizes are for a lone Buddy (s 2.2): one body unit is about 2 px at a
+  // 220 px render, so y -6 is a 12 px hop and edx 4 moves the eyes 8 px.
+  hop: {
+    kind: 'additive', dur: 0.6, isNew: true,
+    source: 'new: a small hop in place; tuck, stretch up about 6 body units, squash on landing and settle. The ground shadow stays on the ground and shrinks while Buddy is up',
+    target: t => {
+      const tuck = ease(seg(t, 0, 0.08)) * (1 - ease(seg(t, 0.08, 0.15)));
+      const k = seg(t, 0.09, 0.43), air = 4 * k * (1 - k);   // parabola: top at 0.26 s
+      const stretch = arcUp(seg(t, 0.1, 0.34)), land = arcUp(seg(t, 0.4, 0.54));
+      const k2 = Math.max(0, t - 0.54), wobble = t > 0.54 ? Math.exp(-14 * k2) * Math.sin(26 * k2) : 0;
+      return {
+        y: -6.6 * air,
+        sy: 1 - 0.09 * tuck + 0.09 * stretch - 0.11 * land + 0.03 * wobble,
+        sx: 1 + 0.07 * tuck - 0.05 * stretch + 0.09 * land - 0.025 * wobble,
+        shadow: 1 - 0.12 * air,
+      };
+    },
+  },
+  'glance-left': {
+    kind: 'additive', dur: 1.4, isNew: true,
+    source: 'new: the eyes glance to the left (edx -4, a little up), hold, and come back; the head tilts after them, with a half blink at the turn',
+    target: t => glance(t, -1),
+  },
+  'glance-right': {
+    kind: 'additive', dur: 1.4, isNew: true,
+    source: 'new: the eyes glance to the right (edx +4, a little up), hold, and come back; the head tilts after them, with a half blink at the turn',
+    target: t => glance(t, 1),
+  },
+  'look-around': {
+    kind: 'additive', dur: 2.4, isNew: true,
+    source: 'new: looks left, back to the centre with a blink, then right and back (the no-events look, made additive)',
+    target: t => {
+      const l = ease(seg(t, 0.1, 0.45)) * (1 - ease(seg(t, 0.8, 1.05)));
+      const r = ease(seg(t, 1.2, 1.55)) * (1 - ease(seg(t, 1.95, 2.3)));
+      return { edx: 4 * (r - l), edy: -0.5 * (l + r), tilt: 1.2 * (r - l), blink: blinkAt(t - 1.07) };
+    },
+  },
 };
+
+// One glance to side dir (-1 left, +1 right): eyes out over 0.25 s, hold 0.6 s, back over 0.35 s.
+function glance(t, dir) {
+  const look = ease(seg(t, 0, 0.25)) * (1 - ease(seg(t, 0.85, 1.2)));
+  const head = ease(seg(t, 0.1, 0.4)) * (1 - ease(seg(t, 0.9, 1.3)));   // follows the eyes, a little late
+  return { edx: 4 * dir * look, edy: -0.5 * look, tilt: 1.5 * dir * head, blink: 1 - 0.65 * arcUp(seg(t, 0.13, 0.27)) };
+}

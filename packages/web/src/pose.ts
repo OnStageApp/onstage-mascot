@@ -7,7 +7,9 @@ import { restPose } from './rest.js';
 export type Phase = 'rest' | 'motion' | 'idle';
 
 const ADD = new Set(['x', 'y', 'tilt', 'edx', 'edy', 'mdx', 'mdy', 'footL', 'footR', 'footLRot', 'footRRot', 'aLang', 'aRang']);
-const MUL = new Set(['sx', 'sy', 'blink']);
+const MUL = new Set(['sx', 'sy', 'blink', 'shadow']);
+/** Multiplied fields a rest pose may lack, and their neutral value. */
+const MUL_DEFAULT: Record<string, number> = { shadow: 1 };
 const DISCRETE_RE = /^(eyeL|eyeR|mouth)(Prev|Fade)?$/;
 
 export function locate(clip: Clip, t: number): { i0: number; i1: number; a: number } {
@@ -61,17 +63,37 @@ export { restPose };
 
 /** Rest pose combined with a clip sample: absolute clips replace fields, additive clips offset them. */
 export function applySample(rest: Pose, clip: Clip, s: Sample): Pose {
-  const p: Record<string, unknown> = { ...restPose(rest) };
+  const p = restPose(rest);
   if (clip.kind === 'absolute') {
-    for (const k in s) p[k] = s[k];
-  } else {
-    for (const k in s) {
-      const v = s[k] as number;
-      if (ADD.has(k)) p[k] = (p[k] as number) + v;
-      else if (MUL.has(k)) p[k] = (p[k] as number) * v;
-    }
+    const r = p as unknown as Record<string, unknown>;
+    for (const k in s) r[k] = s[k];
+    return p;
   }
-  return p as unknown as Pose;
+  return addSample(p, s);
+}
+
+/** Offsets a pose in place by an additive clip sample (contract section 8) and returns it. */
+export function addSample(pose: Pose, s: Sample): Pose {
+  const p = pose as unknown as Record<string, number>;
+  for (const k in s) {
+    const v = s[k] as number;
+    if (ADD.has(k)) p[k] = p[k] + v;
+    else if (MUL.has(k)) p[k] = (p[k] ?? MUL_DEFAULT[k] ?? 1) * v;
+  }
+  return pose;
+}
+
+/** A clip that can be played on top of any pose (player.playClip), or an error. */
+export function getOverlayClip(id: string): Clip {
+  const clip = SPEC.motion[id];
+  if (!clip) throw new Error(`Unknown mascot clip "${id}"`);
+  if (clip.kind !== 'additive' || clip.loop) throw new Error(`Mascot clip "${id}" is not a one-shot additive clip`);
+  return clip;
+}
+
+/** The ids of the one-shot additive clips playClip accepts, in spec order. */
+export function overlayClipIds(): string[] {
+  return Object.keys(SPEC.motion).filter(id => SPEC.motion[id].kind === 'additive' && !SPEC.motion[id].loop && id !== SPEC.states.blink.motion);
 }
 
 export function getState(key: string): StateDef {
@@ -87,8 +109,13 @@ export function clipFor(state: StateDef, phase: Phase): Clip | null {
   return null;
 }
 
-/** Every actor's pose at time t of a phase. blink: per-actor factor on eye height (1 = open). */
-export function resolvePoses(state: StateDef, phase: Phase, t: number, blink?: readonly number[]): Pose[] {
+/** An additive clip played on top of the phase's poses, at time t into the clip (see player.playClip). */
+export interface Overlay { clip: Clip; t: number }
+
+/** Every actor's pose at time t of a phase. blink: per-actor factor on eye height (1 = open).
+ *  overlay: an additive clip applied to every actor after the phase's own clip. */
+export function resolvePoses(state: StateDef, phase: Phase, t: number, blink?: readonly number[], overlay?: Overlay | null): Pose[] {
+  const extra = overlay ? sampleClip(overlay.clip, overlay.t) : null;
   const clip = clipFor(state, phase);
   return state.actors.map((actor, i) => {
     let pose = restPose(actor.rest);
@@ -99,6 +126,7 @@ export function resolvePoses(state: StateDef, phase: Phase, t: number, blink?: r
     } else if (clip && phase === 'idle') {
       pose = applySample(actor.rest, clip, sampleClip(clip, t + i * SPEC.states.idle.actorOffset));
     }
+    if (extra) addSample(pose, extra);
     const b = blink?.[i];
     if (b != null && b !== 1) pose.blink *= b;
     return pose;

@@ -44,7 +44,9 @@
     <label><input type="checkbox" id="dark"> Dark surface</label>
     <label><input type="checkbox" id="reduce"> Reduced motion</label>
     <label><input type="checkbox" id="idleStart"> Start in idle</label>
+    <label><input type="checkbox" id="ambient"> Ambient hops and glances</label>
   </div>
+  <div class="row" id="clips" aria-label="Extra clips"></div>
   <div class="row">
     <input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Motion frame">
     <span id="frameLabel" class="info" style="margin:0">live</span>
@@ -52,7 +54,7 @@
   <div class="info" id="info"></div>
 </main>
 <script type="module">
-  import { SPEC, createPlayer, renderFrameSvg, getState } from '../packages/web/dist/index.js';
+  import { SPEC, createPlayer, renderFrameSvg, getState, overlayClipIds } from '../packages/web/dist/index.js';
 
   const $ = id => document.getElementById(id);
   const el = $('buddy'), sel = $('state'), scrub = $('scrub');
@@ -65,6 +67,13 @@
   if (SPEC.states.states.some(s => s.key === fromHash)) sel.value = fromHash;
 
   const surface = () => ($('dark').checked ? 'dark' : 'light');
+  const ambient = () => ($('ambient').checked ? { clips: ['hop', 'glance-left', 'glance-right'], gapMin: 3, gapMax: 6 } : null);
+  // player.playClip: an additive clip on top of whatever is showing (try them while the state idles).
+  for (const id of overlayClipIds()) {
+    const b = document.createElement('button'); b.textContent = id;
+    b.onclick = () => { player?.resume(); player?.playClip(id, { onDone: () => console.log('clip done', id) }); };
+    $('clips').append(b);
+  }
   let player = null;
   function start() {
     player?.destroy();
@@ -75,7 +84,7 @@
       + `Motion <code>${clip.id}</code>, ${st.motion.plays}, ${clip.frames} frames at ${clip.fps} fps (${clip.duration}s)`
       + `${st.motion.then ? ', then idle' : ''}. ${clip.source ?? ''}`;
     player = createPlayer({ state: st.key, target: el, surface: surface(), reducedMotion: $('reduce').checked,
-      playOnMount: !$('idleStart').checked, onDone: () => console.log('done', st.key) });
+      playOnMount: !$('idleStart').checked, ambient: ambient(), onDone: () => console.log('done', st.key) });
   }
   sel.onchange = start;
   $('play').onclick = start;
@@ -84,6 +93,7 @@
   $('dark').onchange = () => { $('stage').classList.toggle('dark', $('dark').checked); player?.setSurface(surface()); };
   $('reduce').onchange = () => player?.setReducedMotion($('reduce').checked);
   $('idleStart').onchange = start;
+  $('ambient').onchange = () => player?.setAmbient(ambient());
   scrub.oninput = () => {
     player?.pause();
     el.innerHTML = renderFrameSvg(sel.value, { phase: 'motion', frame: +scrub.value }, { surface: surface() });

@@ -2,7 +2,7 @@ name: onstage_mascot
 description: >-
   The OnStage mascot for Flutter. A dumb player for the spec in the repo root (spec/): it samples
   baked frames and draws them, following docs/renderer-contract.md.
-version: 0.1.0
+version: 0.3.0
 publish_to: none
 
 environment:

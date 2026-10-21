@@ -25,7 +25,10 @@ const Set<String> _add = {
   'aLang',
   'aRang',
 };
-const Set<String> _mul = {'sx', 'sy', 'blink'};
+const Set<String> _mul = {'sx', 'sy', 'blink', 'shadow'};
+
+/// Multiplied fields a rest pose may lack, and their neutral value.
+const Map<String, double> _mulDefault = {'shadow': 1};
 const List<String> _tracks = ['eyeL', 'eyeR', 'mouth'];
 const Set<String> _discrete = {
   'eyeL',
@@ -133,7 +136,7 @@ MascotPose applySample(MascotActor actor, MascotClip clip, ClipSample s) {
       if (_add.contains(k)) {
         p[k] = p[k] + v;
       } else if (_mul.contains(k)) {
-        p[k] = p[k] * v;
+        p[k] = (p.values[k] ?? _mulDefault[k] ?? 1) * v;
       }
     });
   }

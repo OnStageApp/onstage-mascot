@@ -249,6 +249,13 @@ Phones render with Impeller (4x MSAA) or Skia on the GPU, not with the test rast
 pixels will differ from both again. Geometry, colours and timing are what the tests pin down; edge
 anti-aliasing is the rasteriser's.
 
+## Extra clips (0.3.0)
+
+The data carries the additive extra clips (`hop`, `glance-left`, `glance-right`, `look-around`) and the
+painter and `applySample` honour the `shadow` factor (contract sections 4.1 and 8), so a clip sampled and
+applied by hand draws like the web. `MascotPlayer` has no `playClip` or ambient schedule yet (contract 9.6);
+porting it is the next step for the platform.
+
 ## Notes for adopters
 
 - Class names that would clash with Flutter carry a `Mascot` prefix (`MascotLayer`, `MascotClip`,

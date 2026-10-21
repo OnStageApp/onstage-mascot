@@ -2,7 +2,8 @@
 // Derived from makeRig() in tools/source/buddy-anim.cjs (copied from claude-brain/design-work/mascot/
 // buddy-anim/buddy-anim.js). The engine's channels behave exactly as in the original:
 // tests/rig.test.mjs runs both rigs on the engine showreel and checks they agree.
-// Added channels: mdy, mw, foot rotations, and arm anchor, length and thumb per side.
+// Added channels: mdy, mw, foot rotations, arm anchor, length and thumb per side, and shadow (ground
+// shadow size factor, default 1).
 //
 // Input and output poses use tools/lib/pose.mjs fields (body units). Arm presence aL/aR in the input
 // is a want flag (>= 0.5 means the arm is there); in the output it is the smoothed presence 0..1.
@@ -14,7 +15,7 @@ export function makeRig() {
     y: .06, x: .07, tilt: .07, sx: .05, sy: .05, edx: .05, edy: .05, mdx: .06, footL: .05, footR: .05, blink: .03,
     aLang: .06, aRang: .06, aL: .08, aR: .08,
     // added
-    mdy: .06, mw: .06, footLRot: .05, footRRot: .05,
+    mdy: .06, mw: .06, footLRot: .05, footRRot: .05, shadow: .05,
     aLx: .06, aLy: .06, aLlen: .06, aRx: .06, aRy: .06, aRlen: .06,
   };
   const damp = (k, target, dt) => { // SmoothDamp (critically damped spring), as in the engine
@@ -29,11 +30,11 @@ export function makeRig() {
     else if (value !== kind[key]) { prev[key] = kind[key]; kind[key] = value; fade[key] = 0; }
     fade[key] = Math.min(1, fade[key] + dt / 0.14);
   };
-  const DEF = { sx: 1, sy: 1, blink: 1, mw: 7 };
+  const DEF = { sx: 1, sy: 1, blink: 1, mw: 7, shadow: 1 };
   function step(p, dt) {
     dt = Math.max(0.001, Math.min(0.05, dt));
     const out = { ...p };
-    for (const k of ['y', 'x', 'sx', 'sy', 'edx', 'edy', 'mdx', 'footL', 'footR', 'blink', 'mdy', 'mw', 'footLRot', 'footRRot']) {
+    for (const k of ['y', 'x', 'sx', 'sy', 'edx', 'edy', 'mdx', 'footL', 'footR', 'blink', 'mdy', 'mw', 'footLRot', 'footRRot', 'shadow']) {
       out[k] = damp(k, p[k] == null ? (DEF[k] ?? 0) : p[k], dt);
     }
     if (cur.tilt != null) cur.tilt = wrap(cur.tilt); // spins stay continuous across 360

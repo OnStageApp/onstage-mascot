@@ -1,5 +1,5 @@
 import { SPEC } from './spec-data.js';
-import { getState, resolvePoses, sampleClip } from './pose.js';
+import { getOverlayClip, getState, resolvePoses, sampleClip } from './pose.js';
 import { drawScene } from './svg.js';
 const MAX_DT = 0.1;
 export function createPlayer(opts) {
@@ -24,6 +24,21 @@ export function createPlayer(opts) {
     let userPaused = false;
     let hidden = false;
     let destroyed = false;
+    let overlay = null;
+    let ambient = null;
+    let ambientNext = Infinity;
+    function setAmbientOpts(a) {
+        if (!a || !a.clips.length) {
+            ambient = null;
+            ambientNext = Infinity;
+            return;
+        }
+        const gapMin = a.gapMin ?? 6;
+        ambient = { ids: [...a.clips], clips: a.clips.map(getOverlayClip), gapMin, gapMax: Math.max(gapMin, a.gapMax ?? 10), random: a.random ?? Math.random };
+        ambientNext = phase === 'idle' ? t + ambientGap() : Infinity;
+    }
+    function ambientGap() { return ambient ? ambient.gapMin + (ambient.gapMax - ambient.gapMin) * ambient.random() : Infinity; }
+    setAmbientOpts(opts.ambient);
     const gap = () => B.gapMin + (B.gapMax - B.gapMin) * rand();
     const blinks = () => phase === 'idle' || (phase === 'motion' && st.motion.plays === 'loop');
     function initBlinks() {
@@ -43,7 +58,7 @@ export function createPlayer(opts) {
         });
     }
     function render() {
-        const svg = drawScene(st, resolvePoses(st, phase, t, blinkFactors()), { surface, size: opts.size, background: opts.background, attrs: opts.attrs });
+        const svg = drawScene(st, resolvePoses(st, phase, t, blinkFactors(), overlay), { surface, size: opts.size, background: opts.background, attrs: opts.attrs });
         if (svg === current)
             return;
         current = svg;
@@ -51,10 +66,15 @@ export function createPlayer(opts) {
             opts.target.innerHTML = svg;
         opts.onFrame?.(svg);
     }
-    function enterIdle() { phase = 'idle'; t = 0; initBlinks(); }
+    function enterIdle() { phase = 'idle'; t = 0; initBlinks(); ambientNext = ambient ? ambientGap() : Infinity; }
+    function startOverlay(id, clip, o) {
+        overlay = { id, clip, t: 0, then: o?.then === undefined ? 'idle' : o.then, onDone: o?.onDone };
+    }
     function start(play) {
         t = 0;
         last = null;
+        overlay = null;
+        ambientNext = Infinity;
         if (reduced) {
             phase = 'rest';
             render();
@@ -87,6 +107,21 @@ export function createPlayer(opts) {
             }
             opts.onDone?.();
         }
+        if (overlay) {
+            overlay.t += Math.min(Math.max(dt, 0), MAX_DT);
+            if (overlay.t >= overlay.clip.duration) {
+                const o = overlay;
+                overlay = null;
+                if (o.then === 'idle' && phase === 'rest')
+                    enterIdle();
+                o.onDone?.();
+            }
+        }
+        if (ambient && phase === 'idle' && !overlay && t >= ambientNext) {
+            const i = Math.min(ambient.clips.length - 1, Math.floor(ambient.random() * ambient.clips.length));
+            startOverlay(ambient.ids[i], ambient.clips[i]);
+            ambientNext = t + ambient.clips[i].duration + ambientGap();
+        }
         render();
     }
     function frame(ms) {
@@ -96,11 +131,11 @@ export function createPlayer(opts) {
         const dt = last == null ? 0 : (ms - last) / 1000;
         last = ms;
         tick(dt);
-        if (phase !== 'rest')
+        if (phase !== 'rest' || overlay)
             handle = reqF(frame);
     }
     function startLoop() {
-        if (!auto || handle != null || destroyed || userPaused || hidden || reduced || phase === 'rest')
+        if (!auto || handle != null || destroyed || userPaused || hidden || reduced || (phase === 'rest' && !overlay))
             return;
         last = null;
         handle = reqF(frame);
@@ -126,6 +161,22 @@ export function createPlayer(opts) {
         get phase() { return phase; },
         get time() { return t; },
         play() { stopLoop(); start(true); },
+        get clip() { return overlay?.id ?? null; },
+        playClip(id, o) {
+            const clip = getOverlayClip(id);
+            if (destroyed)
+                return;
+            if (reduced) {
+                if (o?.onDone)
+                    queueMicrotask(() => { if (!destroyed)
+                        o.onDone(); });
+                return;
+            }
+            startOverlay(id, clip, o);
+            render();
+            startLoop();
+        },
+        setAmbient(a) { setAmbientOpts(a); },
         setState(key, o) { st = getState(key); stopLoop(); start(o?.play ?? true); },
         setSurface(s) { surface = s; current = ''; render(); },
         setReducedMotion(on) {
@@ -134,9 +185,12 @@ export function createPlayer(opts) {
             reduced = on;
             stopLoop();
             if (on) {
+                const o = overlay;
+                overlay = null;
                 phase = 'rest';
                 t = 0;
                 render();
+                o?.onDone?.();
             }
             else
                 start(false);
@@ -147,6 +201,7 @@ export function createPlayer(opts) {
         resume() { userPaused = false; startLoop(); },
         destroy() {
             destroyed = true;
+            overlay = null;
             stopLoop();
             if (doc?.removeEventListener)
                 doc.removeEventListener('visibilitychange', onVis);

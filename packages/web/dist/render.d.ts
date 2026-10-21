@@ -9,6 +9,11 @@ export interface FrameInfo {
     frame?: number;
     /** Per-actor blink factor, 1 = open. */
     blink?: readonly number[];
+    /** An additive clip (hop, glance-left, glance-right, look-around) on top of the phase, t seconds into it. */
+    overlay?: {
+        clip: string;
+        t: number;
+    };
 }
 export interface RenderOptions {
     surface?: Surface;
