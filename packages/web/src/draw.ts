@@ -2,7 +2,7 @@
 // Geometry follows docs/renderer-contract.md exactly; keep the two in step.
 // This file has no data import: the palette, canvas and ground come in as a DrawSpec, so the static
 // entry (static-svg.ts) can use it without pulling in the motion data. svg.ts binds it to SPEC.
-import type { Layer, Pose, Prim, StateDef, Surface, TransformOp, Paint, EyeType, MouthType, PaletteDoc } from './types.js';
+import type { Layer, Pose, Prim, PropDef, StateDef, Surface, TransformOp, Paint, EyeType, MouthType, PaletteDoc } from './types.js';
 
 /** What drawing needs from the spec: the palette, the canvas size and the ground line. */
 export interface DrawSpec {
@@ -186,4 +186,21 @@ export function drawSceneWith(spec: DrawSpec, state: DrawState, poses: Pose[], o
     if (v) bg = `<rect width="${W}" height="${H}" fill="${v}"/>`;
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}"${size}${opts.attrs ?? ''}>${bg}${state.layers.map(l => layer(c, l, actors)).join('')}</svg>`;
+}
+
+/**
+ * Draws a prop on its own (no Buddy, no ground shadow) in its box. Props differ in shape (a keyboard is
+ * long, a microphone small), so `size` sets the area, not a side: the prop covers about size by size
+ * px, and neither side exceeds 1.5 times size. Width and height follow the box's proportions.
+ */
+export function drawPropWith(spec: DrawSpec, prop: Pick<PropDef, 'box' | 'layers'>, opts: Pick<DrawOptions, 'surface' | 'size'> = {}): string {
+  const c = spec.palette.surfaces[opts.surface ?? 'light'];
+  if (!c) throw new Error(`mascot: unknown surface "${opts.surface}"`);
+  const [x, y, w, h] = prop.box;
+  let size = '';
+  if (opts.size != null) {
+    const k = Math.min(opts.size / Math.sqrt(w * h), 1.5 * opts.size / w, 1.5 * opts.size / h);
+    size = ` width="${n(Math.round(w * k))}" height="${n(Math.round(h * k))}"`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${n(x)} ${n(y)} ${n(w)} ${n(h)}"${size}>${prop.layers.map(l => prim(c, l, [])).join('')}</svg>`;
 }

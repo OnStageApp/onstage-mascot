@@ -1,5 +1,5 @@
-import type { StaticStateDef, Surface } from './types.js';
-export type { Surface } from './types.js';
+import type { MascotProp, PropDef, StaticStateDef, Surface } from './types.js';
+export type { MascotProp, Surface } from './types.js';
 export interface RestSvgOptions {
     /** `light` (default) or `dark` (no ground shadow). */
     surface?: Surface;
@@ -29,3 +29,15 @@ export declare function renderRestSvg(stateKey: string, opts?: RestSvgOptions): 
  * Percent-encoded, with quotes and parentheses escaped so it is safe inside any attribute or `url(...)`.
  */
 export declare function restSvgDataUri(stateKey: string, opts?: RestSvgOptions): string;
+/** All prop keys (spec/props.json), in board order. */
+export declare const PROP_KEYS: readonly MascotProp[];
+/** The prop definition for `key`; throws for an unknown key. */
+export declare function getProp(key: string): PropDef;
+export interface PropSvgOptions {
+    /** `light` (default) or `dark`: the parts that sit on the page turn light on dark. */
+    surface?: Surface;
+    /** The prop's visual size in px: it covers about size by size, and no side exceeds 1.5 times size. Omit for no width or height. */
+    size?: number;
+}
+/** Pure: the SVG of a prop on its own, without Buddy, cropped to the drawing. Same input, same string. */
+export declare function renderPropSvg(prop: MascotProp, opts?: PropSvgOptions): string;

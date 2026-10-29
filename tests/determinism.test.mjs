@@ -19,9 +19,17 @@ test('re-baking reproduces spec/motion exactly', () => {
   for (const [id, c] of Object.entries(clips)) assert.deepEqual(JSON.parse(JSON.stringify(c)), readJson(`spec/motion/${id}.json`), id);
 });
 
+// Tokens added to palette.json by hand after the import (0.4.0: propInk, for props.json).
+const HAND_TOKENS = ['propInk'];
+
 test('re-importing the generator reproduces spec/states.json and palette.json', () => {
   // Fails once spec/ has been hand-edited on purpose; then delete this test or re-run with --import.
   const { states, palette } = importStates();
   assert.deepEqual(JSON.parse(JSON.stringify(states)), readJson('spec/states.json'));
-  assert.deepEqual(JSON.parse(JSON.stringify(palette)), readJson('spec/palette.json'));
+  const spec = readJson('spec/palette.json');
+  spec.tokens = spec.tokens.filter(t => !HAND_TOKENS.includes(t));
+  for (const s of Object.values(spec.surfaces)) for (const t of HAND_TOKENS) delete s[t];
+  const imported = JSON.parse(JSON.stringify(palette));
+  delete imported.$comment; delete spec.$comment;
+  assert.deepEqual(imported, spec);
 });

@@ -1,5 +1,5 @@
 import { STATIC_SPEC } from './static-data.js';
-import { drawSceneWith } from './draw.js';
+import { drawPropWith, drawSceneWith } from './draw.js';
 import { restPose } from './rest.js';
 const DRAW = { palette: STATIC_SPEC.palette, canvas: STATIC_SPEC.canvas, ground: STATIC_SPEC.ground };
 /** All state keys, in board order. */
@@ -25,4 +25,17 @@ export function renderRestSvg(stateKey, opts = {}) {
 export function restSvgDataUri(stateKey, opts = {}) {
     const enc = encodeURIComponent(renderRestSvg(stateKey, opts)).replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
     return 'data:image/svg+xml;charset=utf-8,' + enc;
+}
+/** All prop keys (spec/props.json), in board order. */
+export const PROP_KEYS = STATIC_SPEC.props.map(p => p.key);
+/** The prop definition for `key`; throws for an unknown key. */
+export function getProp(key) {
+    const prop = STATIC_SPEC.props.find(p => p.key === key);
+    if (!prop)
+        throw new Error(`Unknown mascot prop "${key}"`);
+    return prop;
+}
+/** Pure: the SVG of a prop on its own, without Buddy, cropped to the drawing. Same input, same string. */
+export function renderPropSvg(prop, opts = {}) {
+    return drawPropWith(DRAW, getProp(prop), { surface: opts.surface, size: opts.size });
 }

@@ -7,6 +7,7 @@ and playback algorithm is in [`docs/renderer-contract.md`](../docs/renderer-cont
 |---|---|---|
 | `palette.json` | hand | Colour tokens per surface (`light`, `dark`). |
 | `states.json` | hand | All 85 states: scene (actors and props), rest poses, which motion plays. |
+| `props.json` | hand | Props on their own, without Buddy (0.4.0): instruments and tools for a lineup. |
 | `motion/<id>.json` | `npm run bake` only | Baked frames. Never edit by hand; change `tools/motion/definitions.mjs` and re-bake. |
 
 `palette.json` and `states.json` were imported once from the state generator (the drawing the Figma
@@ -28,7 +29,8 @@ one-off fold line on the map prop.
 
 Tokens: body #A4D4E3 (brand blue), feet, arm, shadow #7FBFD3, navy #00275C, ghost #CBE6EE (empty or
 missing things), deep #00588C, mapLine #B5D9E4, coral #F28B7D, coralLight #F8BFB8, coralDark #AE6F74,
-onCoral (ink on coral, navy today), mint #8FD6B5, white, card.
+onCoral (ink on coral, navy today), mint #8FD6B5, white, card, propInk (props on their own: navy on
+light, #CBE6EE on dark; added by hand in 0.4.0, no state uses it).
 
 ## states.json
 
@@ -54,6 +56,23 @@ onCoral (ink on coral, navy today), mint #8FD6B5, white, card.
   `track` is reserved for animated props.
 - `motion`: the clip `id` in `motion/`, `plays` (`once` or `loop`), `then` (`idle`, or null for loops),
   and which actors it drives with a start `offset` in seconds. Actors not listed stay at rest.
+
+## props.json
+
+```json
+{ "format": 1, "props": [ { "key": "acousticGuitar", "name": "Acoustic guitar", "use": "Acoustic guitar",
+  "box": [76, 114, 133, 105], "layers": [ { "type": "group", ... } ] } ] }
+```
+
+- `key`: the `MascotProp` name the web package types (`packages/web/src/types.ts`); a test keeps the two equal.
+- `box`: the viewBox `[x, y, w, h]`, a crop around the drawing. Instruments that a state already draws
+  are copied from it in canvas units (the guitar of `playing`, the keys of `keyboard`, the desk of
+  `mixing`); the others are drawn in their own units.
+- `layers`: prop primitives only (no `actor`). Parts on the page use `propInk`, so the prop reads on
+  dark surfaces; details on a fill keep `navy`.
+
+Keys: `microphone`, `acousticGuitar`, `electricGuitar`, `bass`, `keys`, `drums`, `sound`, `slides`,
+`lights`, `camera`, `livestream`, and `clipboard` (the generic prop, for a role without an instrument).
 
 ## motion/&lt;id&gt;.json
 
