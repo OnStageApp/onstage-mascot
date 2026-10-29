@@ -105,6 +105,21 @@ renderFrameSvg('excited', { phase: 'idle', t: 0, overlay: { clip: 'hop', t: 0.3 
 `ambient` plays one of `clips` after every 6 to 10 seconds of idle (`gapMin`, `gapMax`, optional `random`).
 See them in the playground (buttons under the stage) or as a strip: `npm run contact-sheet -- --clip hop`.
 
+**Props on their own (0.4.0).** Instruments and tools without Buddy, for a lineup around him: `microphone`,
+`acousticGuitar`, `electricGuitar`, `bass`, `keys`, `drums`, `sound`, `slides`, `lights`, `camera`,
+`livestream` and `clipboard` (the generic one). From the static entry, server-safe:
+
+```tsx
+import { PropStatic, renderPropSvg, PROP_KEYS, type MascotProp } from '@onstageapp/mascot/static';
+
+<PropStatic prop="camera" size={72} surface="dark" decorative />
+const svg = renderPropSvg('bass', { size: 72 });   // pure string
+```
+
+`size` sets the area, not a side (a keyboard is long, a microphone small): the prop covers about
+size by size px and no side exceeds 1.5 x size. On `dark` the parts that sit on the page turn light.
+Data in `spec/props.json`; web only for now (Flutter carries the `propInk` token, not the props).
+
 **Flutter.** Dart git dependency on the same tag:
 
 ```yaml
@@ -141,7 +156,7 @@ const svg = renderRestSvg('no-events', { surface: 'light', size: 120 });   // pu
 const src = restSvgDataUri('no-events', { size: 120 });                    // for <img src> and CSS url()
 ```
 
-`@onstageapp/mascot/static` loads about 97 KB of JavaScript (14 KB gzipped) against about 207 KB (36 KB
+`@onstageapp/mascot/static` loads about 109 KB of JavaScript (15 KB gzipped) against about 227 KB (40 KB
 gzipped) for the full entry, because it embeds only the 85 states and none of the motion clips, the
 sampler, the player or the random source. `@onstageapp/mascot/static-svg` has the same string functions
 with no React at all (`renderRestSvg`, `restSvgDataUri`, `STATE_KEYS`, `STATE_INFO`), for scripts,

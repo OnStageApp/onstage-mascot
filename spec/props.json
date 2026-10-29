@@ -1,0 +1,141 @@
+{
+  "format": 1,
+  "$comment": "Props drawn on their own, without Buddy: each is layers (the same primitives as states.json) and a box, the viewBox [x, y, w, h] around the drawing. Instruments drawn in a state are copied from that state, in its canvas units.",
+  "props": [
+    {
+      "key": "microphone", "name": "Microphone", "use": "Vocals, worship leader",
+      "box": [136,136,48,57],
+      "layers": [
+        {"type":"group","children":[{"type":"path","d":"M143 158L157 158L153 198C151 200.667 149 200.667 147 198Z","fill":"propInk"},{"type":"circle","cx":150,"cy":150,"r":12,"fill":"coral"}],"transform":[["rotate",-38,150,150]]}
+      ]
+    },
+    {
+      "key": "acousticGuitar", "name": "Acoustic guitar", "use": "Acoustic guitar",
+      "box": [76,114,133,105],
+      "layers": [
+        {"type":"group","children":[{"type":"circle","cx":98,"cy":180,"r":25,"fill":"coral"},{"type":"circle","cx":124,"cy":176,"r":19,"fill":"coral"},{"type":"circle","cx":108,"cy":178,"r":7,"fill":"navy"},{"type":"rect","x":132,"y":171,"w":72,"h":9,"rx":3,"ry":3,"fill":"propInk"},{"type":"rect","x":200,"y":166,"w":16,"h":19,"rx":4,"ry":4,"fill":"propInk"}],"transform":[["rotate",-32,120,176]]}
+      ]
+    },
+    {
+      "key": "electricGuitar", "name": "Electric guitar", "use": "Electric guitar",
+      "box": [76,114,133,105],
+      "layers": [
+        {"type":"group","children":[{"type":"circle","cx":98,"cy":180,"r":25,"fill":"deep"},{"type":"circle","cx":124,"cy":176,"r":19,"fill":"deep"},{"type":"rect","x":100,"y":168,"w":6,"h":22,"rx":3,"ry":3,"fill":"ghost"},{"type":"rect","x":112,"y":166,"w":6,"h":22,"rx":3,"ry":3,"fill":"ghost"},{"type":"rect","x":132,"y":171,"w":72,"h":9,"rx":3,"ry":3,"fill":"propInk"},{"type":"rect","x":200,"y":166,"w":16,"h":19,"rx":4,"ry":4,"fill":"propInk"}],"transform":[["rotate",-32,120,176]]}
+      ]
+    },
+    {
+      "key": "bass", "name": "Bass", "use": "Bass guitar",
+      "box": [76,104,150,115],
+      "layers": [
+        {"type":"group","children":[{"type":"circle","cx":98,"cy":180,"r":25,"fill":"coralDark"},{"type":"circle","cx":124,"cy":176,"r":19,"fill":"coralDark"},{"type":"rect","x":106,"y":167,"w":7,"h":24,"rx":3.5,"ry":3.5,"fill":"ghost"},{"type":"rect","x":132,"y":171,"w":92,"h":9,"rx":3,"ry":3,"fill":"propInk"},{"type":"rect","x":220,"y":166,"w":16,"h":19,"rx":4,"ry":4,"fill":"propInk"}],"transform":[["rotate",-32,120,176]]}
+      ]
+    },
+    {
+      "key": "keys", "name": "Keys", "use": "Piano, keyboard",
+      "box": [34,168,172,46],
+      "layers": [
+        {"type":"rect","x":36,"y":170,"w":168,"h":40,"rx":7,"ry":7,"fill":"ghost"},
+        {"type":"rect","x":60,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":84,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":108,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":132,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":156,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":180,"y":170,"w":10,"h":22,"rx":2.5,"ry":2.5,"fill":"navy"},
+        {"type":"rect","x":36,"y":206,"w":168,"h":6,"rx":3,"ry":3,"fill":"deep"}
+      ]
+    },
+    {
+      "key": "drums", "name": "Drums", "use": "Drums",
+      "box": [68,142,104,66],
+      "layers": [
+        {"type":"rect","x":70,"y":154,"w":100,"h":52,"rx":10,"ry":10,"fill":"deep"},
+        {"type":"ellipse","cx":120,"cy":154,"rx":50,"ry":10,"fill":"ghost"},
+        {"type":"rect","x":70,"y":184,"w":100,"h":7,"rx":0,"ry":0,"fill":"coral"}
+      ]
+    },
+    {
+      "key": "sound", "name": "Sound desk", "use": "Sound, tech team",
+      "box": [28,156,184,56],
+      "layers": [
+        {"type":"rect","x":30,"y":158,"w":180,"h":52,"rx":10,"ry":10,"fill":"deep"},
+        {"type":"rect","x":46,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":41,"y":176,"w":14,"h":8,"rx":3,"ry":3,"fill":"ghost"},
+        {"type":"rect","x":72,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":67,"y":186,"w":14,"h":8,"rx":3,"ry":3,"fill":"ghost"},
+        {"type":"rect","x":98,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":93,"y":170,"w":14,"h":8,"rx":3,"ry":3,"fill":"coral"},
+        {"type":"rect","x":124,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":119,"y":182,"w":14,"h":8,"rx":3,"ry":3,"fill":"ghost"},
+        {"type":"rect","x":150,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":145,"y":178,"w":14,"h":8,"rx":3,"ry":3,"fill":"ghost"},
+        {"type":"rect","x":176,"y":168,"w":4,"h":32,"rx":2,"ry":2,"fill":"navy"},
+        {"type":"rect","x":171,"y":190,"w":14,"h":8,"rx":3,"ry":3,"fill":"ghost"}
+      ]
+    },
+    {
+      "key": "slides", "name": "Slides", "use": "Slides, lyrics on screen",
+      "box": [120,34,112,127],
+      "layers": [
+        {"type":"rect","x":122,"y":36,"w":108,"h":74,"rx":9,"ry":9,"fill":"deep"},
+        {"type":"rect","x":128,"y":42,"w":96,"h":62,"rx":5,"ry":5,"fill":"ghost"},
+        {"type":"rect","x":136,"y":50,"w":52,"h":8,"rx":4,"ry":4,"fill":"coral"},
+        {"type":"rect","x":136,"y":66,"w":70,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"},
+        {"type":"rect","x":136,"y":76,"w":70,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"},
+        {"type":"rect","x":136,"y":86,"w":42,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"},
+        {"type":"rect","x":172,"y":110,"w":8,"h":46,"rx":4,"ry":4,"fill":"propInk"},
+        {"type":"rect","x":156,"y":152,"w":40,"h":7,"rx":3.5,"ry":3.5,"fill":"propInk"}
+      ]
+    },
+    {
+      "key": "lights", "name": "Lights", "use": "Lighting",
+      "box": [16,0,88,99],
+      "layers": [
+        {"type":"rect","x":28,"y":90,"w":44,"h":7,"rx":3.5,"ry":3.5,"fill":"propInk"},
+        {"type":"rect","x":46,"y":58,"w":8,"h":34,"rx":4,"ry":4,"fill":"propInk"},
+        {"type":"path","d":"M30 34L30 60L70 60L70 34","fill":null,"stroke":"propInk","strokeWidth":6,"cap":"round","join":"round"},
+        {"type":"group","transform":[["rotate",-20,50,40]],"children":[{"type":"rect","x":22,"y":24,"w":46,"h":32,"rx":8,"ry":8,"fill":"deep"},{"type":"rect","x":64,"y":20,"w":10,"h":40,"rx":4,"ry":4,"fill":"propInk"},{"type":"path","d":"M82 26L94 20","fill":null,"stroke":"coral","strokeWidth":5,"cap":"round","join":"round"},{"type":"path","d":"M84 40L98 40","fill":null,"stroke":"coral","strokeWidth":5,"cap":"round","join":"round"},{"type":"path","d":"M82 54L94 60","fill":null,"stroke":"coral","strokeWidth":5,"cap":"round","join":"round"}]}
+      ]
+    },
+    {
+      "key": "camera", "name": "Camera", "use": "Camera",
+      "box": [6,18,90,77],
+      "layers": [
+        {"type":"rect","x":24,"y":20,"w":30,"h":9,"rx":4.5,"ry":4.5,"fill":"propInk"},
+        {"type":"rect","x":8,"y":28,"w":66,"h":46,"rx":9,"ry":9,"fill":"deep"},
+        {"type":"path","d":"M74 44L94 34L94 68L74 58Z","fill":"propInk"},
+        {"type":"circle","cx":41,"cy":51,"r":15,"fill":"ghost"},
+        {"type":"circle","cx":41,"cy":51,"r":8,"fill":"navy"},
+        {"type":"circle","cx":18,"cy":37,"r":4,"fill":"coral"},
+        {"type":"rect","x":37,"y":74,"w":8,"h":14,"rx":0,"ry":0,"fill":"propInk"},
+        {"type":"rect","x":24,"y":86,"w":34,"h":7,"rx":3.5,"ry":3.5,"fill":"propInk"}
+      ]
+    },
+    {
+      "key": "livestream", "name": "Livestream", "use": "Livestream",
+      "box": [1,6,98,93],
+      "layers": [
+        {"type":"path","d":"M50 46L38 94L62 94Z","fill":"deep"},
+        {"type":"rect","x":32,"y":90,"w":36,"h":7,"rx":3.5,"ry":3.5,"fill":"propInk"},
+        {"type":"path","d":"M35 23C26 30 26 48 35 55","fill":null,"stroke":"propInk","strokeWidth":6,"cap":"round","join":"round"},
+        {"type":"path","d":"M65 23C74 30 74 48 65 55","fill":null,"stroke":"propInk","strokeWidth":6,"cap":"round","join":"round"},
+        {"type":"path","d":"M22 11C6 25 6 53 22 67","fill":null,"stroke":"propInk","strokeWidth":6,"cap":"round","join":"round"},
+        {"type":"path","d":"M78 11C94 25 94 53 78 67","fill":null,"stroke":"propInk","strokeWidth":6,"cap":"round","join":"round"},
+        {"type":"circle","cx":50,"cy":39,"r":10,"fill":"coral"}
+      ]
+    },
+    {
+      "key": "clipboard", "name": "Clipboard", "use": "Any role without an instrument: admin, organiser",
+      "box": [148,92,70,96],
+      "layers": [
+        {"type":"rect","x":150,"y":100,"w":66,"h":86,"rx":9,"ry":9,"fill":"deep"},
+        {"type":"rect","x":158,"y":114,"w":50,"h":64,"rx":5,"ry":5,"fill":"ghost"},
+        {"type":"rect","x":170,"y":94,"w":26,"h":13,"rx":5,"ry":5,"fill":"coral"},
+        {"type":"path","d":"M164.5 130L168.35 133.85L175.5 125.6","fill":null,"stroke":"navy","strokeWidth":4,"cap":"round","join":"round"},
+        {"type":"rect","x":180,"y":127,"w":22,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"},
+        {"type":"path","d":"M164.5 148L168.35 151.85L175.5 143.6","fill":null,"stroke":"navy","strokeWidth":4,"cap":"round","join":"round"},
+        {"type":"rect","x":180,"y":145,"w":18,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"},
+        {"type":"rect","x":166,"y":162,"w":30,"h":4.4,"rx":2.2,"ry":2.2,"fill":"navy"}
+      ]
+    }
+  ]
+}

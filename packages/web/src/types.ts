@@ -85,6 +85,25 @@ export interface StatesDoc {
   states: StateDef[];
 }
 
+/** A prop drawn on its own, without Buddy (spec/props.json). */
+export type MascotProp =
+  | 'microphone' | 'acousticGuitar' | 'electricGuitar' | 'bass' | 'keys' | 'drums'
+  | 'sound' | 'slides' | 'lights' | 'camera' | 'livestream' | 'clipboard';
+
+export interface PropDef {
+  key: MascotProp;
+  name: string;
+  use: string;
+  /** The square viewBox the prop is drawn in: x, y, width, height in its own units. */
+  box: [number, number, number, number];
+  layers: Prim[];
+}
+
+export interface PropsDoc {
+  format: 1;
+  props: PropDef[];
+}
+
 export interface Clip {
   format: 1;
   id: string;
@@ -113,10 +132,12 @@ export interface StaticSpecData {
   canvas: { width: number; height: number };
   ground: number;
   states: StaticStateDef[];
+  props: PropDef[];
 }
 
 export interface SpecData {
   palette: PaletteDoc;
   states: StatesDoc;
+  props: PropsDoc;
   motion: Record<string, Clip>;
 }

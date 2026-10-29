@@ -233,6 +233,15 @@ Every primitive and group may carry `transform`: a list of ops applied in list o
 Wrap the primitive in save/restore so its transform does not leak. Arcs, quadratics and relative
 commands from the generator were converted to cubics at bake time (error far below a pixel).
 
+### 5.1 A prop on its own (`spec/props.json`, 0.4.0)
+
+A prop drawn without Buddy: no actor, no ground shadow, no motion. Draw its `layers` with the rules
+above, with the viewBox set to its `box` `[x, y, w, h]` (a crop around the drawing, not square). With a
+requested size `size`, scale so the prop covers about `size` by `size` and neither side exceeds 1.5 x
+`size`: `k = min(size / sqrt(w * h), 1.5 * size / w, 1.5 * size / h)`, output `round(w * k)` by
+`round(h * k)` px. Parts that sit on the page use the `propInk` token (navy on light, light on dark);
+details on a fill keep `navy`.
+
 ## 6. Paint rules
 
 - `fill`: token or `null`. `null` means no fill. Fill rule nonzero.
@@ -450,6 +459,10 @@ animated player (section 9.1, `rest` phase), which `tests/static.test.mjs` asser
 - Unknown top-level keys in any spec file must be ignored, not rejected.
 
 ## Changes
+
+- 2026-10-29 (0.4.0), section 5.1: props on their own (`spec/props.json`) and the `propInk` token. No
+  change to how a state draws. Web implements it (`renderPropSvg`, `PropStatic`); Flutter carries the
+  token, not the props.
 
 - 2026-10-21 (0.3.0), sections 2, 4.1, 8 and 9.6: added the additive clips `hop`, `glance-left`,
   `glance-right` and `look-around`, the optional `shadow` pose field (ground shadow size factor, absent =

@@ -1,5 +1,5 @@
 // A server component using the static entry: no 'use client', no hooks.
-import { BuddyStatic, renderRestSvg, restSvgDataUri, STATE_KEYS, STATE_INFO, type BuddyStaticProps, type StateInfo } from '@onstageapp/mascot/static';
+import { BuddyStatic, PropStatic, renderRestSvg, renderPropSvg, restSvgDataUri, PROP_KEYS, STATE_KEYS, STATE_INFO, type BuddyStaticProps, type MascotProp, type StateInfo } from '@onstageapp/mascot/static';
 import { renderRestSvg as pureSvg } from '@onstageapp/mascot/static-svg';
 
 export function EmptyEventsStatic() {
@@ -12,6 +12,8 @@ export function EmptyEventsStatic() {
       <img alt="" src={restSvgDataUri('hello', { size: 64 })} />
       <div dangerouslySetInnerHTML={{ __html: renderRestSvg('hello', { surface: 'dark', size: 64 }) + pureSvg('hello') }} />
       <p>{STATE_KEYS.length} states, first is {first.name}</p>
+      {PROP_KEYS.map((prop: MascotProp) => <PropStatic key={prop} prop={prop} size={64} surface="dark" decorative />)}
+      <div dangerouslySetInnerHTML={{ __html: renderPropSvg('camera', { size: 48 }) }} />
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import type { Pose, StateDef, Surface, EyeType, MouthType, PaletteDoc } from './types.js';
+import type { Pose, PropDef, StateDef, Surface, EyeType, MouthType, PaletteDoc } from './types.js';
 /** What drawing needs from the spec: the palette, the canvas size and the ground line. */
 export interface DrawSpec {
     palette: PaletteDoc;
@@ -26,4 +26,10 @@ export interface DrawOptions {
     attrs?: string;
 }
 export declare function drawSceneWith(spec: DrawSpec, state: DrawState, poses: Pose[], opts?: DrawOptions): string;
+/**
+ * Draws a prop on its own (no Buddy, no ground shadow) in its box. Props differ in shape (a keyboard is
+ * long, a microphone small), so `size` sets the area, not a side: the prop covers about size by size
+ * px, and neither side exceeds 1.5 times size. Width and height follow the box's proportions.
+ */
+export declare function drawPropWith(spec: DrawSpec, prop: Pick<PropDef, 'box' | 'layers'>, opts?: Pick<DrawOptions, 'surface' | 'size'>): string;
 export {};

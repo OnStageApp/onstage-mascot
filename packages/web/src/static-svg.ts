@@ -1,12 +1,12 @@
 // The static entry, without React: the resting pose of a state as an SVG string. Pure and server-safe.
 // It reads only the states-only data (static-data.ts) and draw.ts: no player, sampler, rng or motion clip.
 // The output is byte-identical to the resting frame of the animated player (renderFrameSvg(key)).
-import type { StaticStateDef, Surface } from './types.js';
+import type { MascotProp, PropDef, StaticStateDef, Surface } from './types.js';
 import { STATIC_SPEC } from './static-data.js';
-import { drawSceneWith, type DrawSpec } from './draw.js';
+import { drawPropWith, drawSceneWith, type DrawSpec } from './draw.js';
 import { restPose } from './rest.js';
 
-export type { Surface } from './types.js';
+export type { MascotProp, Surface } from './types.js';
 
 export interface RestSvgOptions {
   /** `light` (default) or `dark` (no ground shadow). */
@@ -54,4 +54,26 @@ export function renderRestSvg(stateKey: string, opts: RestSvgOptions = {}): stri
 export function restSvgDataUri(stateKey: string, opts: RestSvgOptions = {}): string {
   const enc = encodeURIComponent(renderRestSvg(stateKey, opts)).replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
   return 'data:image/svg+xml;charset=utf-8,' + enc;
+}
+
+/** All prop keys (spec/props.json), in board order. */
+export const PROP_KEYS: readonly MascotProp[] = STATIC_SPEC.props.map(p => p.key);
+
+/** The prop definition for `key`; throws for an unknown key. */
+export function getProp(key: string): PropDef {
+  const prop = STATIC_SPEC.props.find(p => p.key === key);
+  if (!prop) throw new Error(`Unknown mascot prop "${key}"`);
+  return prop;
+}
+
+export interface PropSvgOptions {
+  /** `light` (default) or `dark`: the parts that sit on the page turn light on dark. */
+  surface?: Surface;
+  /** The prop's visual size in px: it covers about size by size, and no side exceeds 1.5 times size. Omit for no width or height. */
+  size?: number;
+}
+
+/** Pure: the SVG of a prop on its own, without Buddy, cropped to the drawing. Same input, same string. */
+export function renderPropSvg(prop: MascotProp, opts: PropSvgOptions = {}): string {
+  return drawPropWith(DRAW, getProp(prop), { surface: opts.surface, size: opts.size });
 }

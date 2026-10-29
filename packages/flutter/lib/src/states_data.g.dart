@@ -7,7 +7,7 @@
 const String paletteJson = r'''
 {
   "format": 1,
-  "$comment": "Colour tokens. Scenes and the player name tokens, never hex. A null token is not drawn. \"card\" is the reference background (not part of any scene).",
+  "$comment": "Colour tokens. Scenes and the player name tokens, never hex. A null token is not drawn. \"card\" is the reference background (not part of any scene). \"propInk\" is the ink of a prop drawn on its own (props.json) where it sits on the page: navy on light, light on dark.",
   "tokens": [
     "body",
     "feet",
@@ -23,7 +23,8 @@ const String paletteJson = r'''
     "onCoral",
     "mint",
     "white",
-    "card"
+    "card",
+    "propInk"
   ],
   "surfaces": {
     "light": {
@@ -41,7 +42,8 @@ const String paletteJson = r'''
       "onCoral": "#00275C",
       "mint": "#8FD6B5",
       "white": "#FFFFFF",
-      "card": "#F4F4F2"
+      "card": "#F4F4F2",
+      "propInk": "#00275C"
     },
     "dark": {
       "body": "#A4D4E3",
@@ -58,7 +60,8 @@ const String paletteJson = r'''
       "onCoral": "#00275C",
       "mint": "#8FD6B5",
       "white": "#FFFFFF",
-      "card": "#F4F4F2"
+      "card": "#F4F4F2",
+      "propInk": "#CBE6EE"
     }
   }
 }
