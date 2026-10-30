@@ -66,8 +66,8 @@ npm run export-static   # assets/: SVG (light, dark) and PNG (480 and 240 px) of
 ```
 
 After editing `spec/states.json` or `spec/palette.json` by hand: `npm run bake && npm run build && npm test`.
-The test that re-imports the generator and expects an identical `states.json` will then fail on purpose;
-delete it once spec/ has deliberately moved on from the generator.
+spec/ has deliberately moved on from the generator, so `--import` drops those edits. A pose changed by hand
+also needs its frame refreshed in `tests/fixtures/rest-reference`.
 
 ## Using it in an app
 

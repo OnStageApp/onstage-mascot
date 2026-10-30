@@ -41,11 +41,11 @@
    "t": 1.0333333333333334
   },
   {
-   "file": "motion-welcome-team-f062.png",
+   "file": "motion-welcome-team-f063.png",
    "state": "welcome-team",
    "phase": "motion",
-   "frame": 62,
-   "t": 2.066666666666667
+   "frame": 63,
+   "t": 2.1
   },
   {
    "file": "motion-all-set-f000.png",

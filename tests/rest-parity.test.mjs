@@ -1,6 +1,7 @@
 // Rest-pose parity: all 85 resting frames from the web renderer, rasterised by rsvg-convert at 240 px
 // on the card colour, against the PNGs the generator produced (tests/fixtures/rest-reference, copied
-// from claude-brain/design-work/mascot/blue-app-states/png). Writes reports/rest-parity/.
+// from claude-brain/design-work/mascot/blue-app-states/png). welcome-team moved on from the generator
+// (he holds up the team badge), so its reference is this renderer's own frame. Writes reports/rest-parity/.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

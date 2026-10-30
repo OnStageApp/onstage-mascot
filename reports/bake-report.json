@@ -9,20 +9,20 @@
   },
   "sizes": {
     "motion": {
-      "rawKB": 105.2,
-      "gzipKB": 20.4
+      "rawKB": 104.7,
+      "gzipKB": 20.5
     },
     "states": {
-      "rawKB": 120.6,
-      "gzipKB": 10.4
+      "rawKB": 122.3,
+      "gzipKB": 10.8
     },
     "palette": {
-      "rawKB": 1.2,
-      "gzipKB": 0.4
+      "rawKB": 1.4,
+      "gzipKB": 0.5
     },
     "motionPlusStates": {
-      "rawKB": 225.8,
-      "gzipKB": 30.9
+      "rawKB": 227,
+      "gzipKB": 31.3
     }
   },
   "clips": {
@@ -129,12 +129,12 @@
       "kind": "absolute",
       "plays": "once",
       "new": true,
-      "frames": 63,
-      "duration": 2.067,
-      "fields": 6,
-      "constants": 30,
-      "endResidual": 0.000866,
-      "interpolationError": {"pos":0.0209,"ang":0.774,"scale":0.00132,"presence":0,"opacity":0,"worstField":{"pos":"y","ang":"aR","scale":"sy"}}
+      "frames": 64,
+      "duration": 2.1,
+      "fields": 5,
+      "constants": 31,
+      "endResidual": 0.000994,
+      "interpolationError": {"pos":0.0845,"ang":0.741,"scale":0,"presence":0,"opacity":0,"worstField":{"pos":"aL","ang":"aL"}}
     },
     "no-events": {
       "kind": "absolute",
