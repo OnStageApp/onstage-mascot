@@ -89,14 +89,14 @@ export const MOTIONS = {
   // ---------- bespoke, new ----------
   'welcome-team': {
     kind: 'absolute', dur: 1.8, isNew: true,
-    source: 'new: a happy wiggle in place, side arms flapping in turn (kept small so the lanyard stays on)',
+    source: 'new: holds up the team badge and glances at it, the free arm waving (the body stays put so the badge stays in his hand)',
     target: (t, rest) => {
-      const k = ease(seg(t, 0, 0.25)) * (1 - ease(seg(t, 1.5, 1.8))), w = wob(t, 2.5);
+      const k = ease(seg(t, 0, 0.25)) * (1 - ease(seg(t, 1.5, 1.8))), w = wob(t, 2.5), look = ease(seg(t, 0.2, 0.6)) - ease(seg(t, 1.2, 1.6));
       return {
         ...rest,
-        sy: rest.sy * (1 + 0.035 * k * w), sx: rest.sx * (1 - 0.025 * k * w),
-        tilt: rest.tilt + 3 * k * wob(t, 1.25), y: -0.8 * k * Math.max(0, w),
-        aLang: rest.aLang + 28 * k * Math.max(0, w), aRang: rest.aRang - 28 * k * Math.max(0, -w),
+        edx: rest.edx + 3 * look, edy: rest.edy - 1.5 * look,
+        aLy: rest.aLy - 8.5 * k, aLlen: rest.aLlen + 10 * k,
+        aLang: rest.aLang + k * (58 + 14 * w),
       };
     },
   },
