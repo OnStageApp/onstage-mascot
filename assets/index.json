@@ -856,6 +856,16 @@
    "svgDark": "svg-dark/setlist.svg",
    "png": "png/setlist.png",
    "png1x": "png/setlist@1x.png"
+  },
+  {
+   "key": "gift",
+   "group": "Actions and tools",
+   "name": "Gift",
+   "use": "A gift or a free extra: connecting an integration, a welcome bonus. Never on payment or paywall screens",
+   "svg": "svg/gift.svg",
+   "svgDark": "svg-dark/gift.svg",
+   "png": "png/gift.png",
+   "png1x": "png/gift@1x.png"
   }
  ]
 }

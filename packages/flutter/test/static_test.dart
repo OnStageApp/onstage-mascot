@@ -173,7 +173,7 @@ void main() {
           );
         }
       }
-      expect(static_lib.mascotStateKeys, hasLength(85));
+      expect(static_lib.mascotStateKeys, hasLength(86));
     });
 
     testWidgets('an unknown state throws like Buddy', (tester) async {
@@ -224,7 +224,7 @@ void main() {
     });
 
     testWidgets(
-      'paints exactly the frame painter\'s rest frame, 85 states x 2 surfaces',
+      'paints exactly the frame painter\'s rest frame, 86 states x 2 surfaces',
       (tester) async {
         const px = 96;
         for (final key in static_lib.mascotStateKeys) {
@@ -317,9 +317,9 @@ void main() {
       }
     });
 
-    test('mascotStateInfo lists the 85 states with group, name and use', () {
+    test('mascotStateInfo lists the 86 states with group, name and use', () {
       final info = static_lib.mascotStateInfo;
-      expect(info, hasLength(85));
+      expect(info, hasLength(86));
       for (final (i, s) in MascotSpec.instance.states.indexed) {
         expect(info[i].key, s.key);
         expect(info[i].group, s.group);
