@@ -4630,6 +4630,82 @@
           {"actor":0,"offset":0}
         ]
       }
+    },
+    {
+      "key": "gift",
+      "group": "Actions and tools",
+      "name": "Gift",
+      "use": "A gift or a free extra: connecting an integration, a welcome bonus. Never on payment or paywall screens",
+      "actors": [
+        {
+          "cx": 120,
+          "by": 196,
+          "s": 2.2,
+          "shadow": true,
+          "rest": {"x":0,"y":0,"tilt":0,"sx":1.04,"sy":0.93,"eyeL":"oval","eyeR":"oval","edx":0,"edy":0,"blink":1,"mouth":"curve","mw":7,"mdx":0,"mdy":0,"footL":0,"footR":0,"footLRot":0,"footRRot":0,"aL":1,"aLx":3,"aLy":10.8,"aLang":-12,"aLlen":26,"aLthumb":0,"aR":1,"aRx":61,"aRy":10.8,"aRang":12,"aRlen":26,"aRthumb":0,"fold":0,"badge":0}
+        }
+      ],
+      "layers": [
+        {
+          "type": "rect",
+          "x": 72,
+          "y": 18,
+          "w": 96,
+          "h": 60,
+          "rx": 8,
+          "ry": 8,
+          "fill": "deep"
+        },
+        {
+          "type": "rect",
+          "x": 112,
+          "y": 18,
+          "w": 16,
+          "h": 60,
+          "rx": 0,
+          "ry": 0,
+          "fill": "coral"
+        },
+        {
+          "type": "rect",
+          "x": 72,
+          "y": 40,
+          "w": 96,
+          "h": 14,
+          "rx": 0,
+          "ry": 0,
+          "fill": "coral"
+        },
+        {
+          "type": "path",
+          "d": "M120 18C110 1 90 1 92 12C93 19 108 20 120 18Z",
+          "fill": "coral"
+        },
+        {
+          "type": "path",
+          "d": "M120 18C130 1 150 1 148 12C147 19 132 20 120 18Z",
+          "fill": "coral"
+        },
+        {
+          "type": "circle",
+          "cx": 120,
+          "cy": 17,
+          "r": 6,
+          "fill": "coralDark"
+        },
+        {
+          "type": "actor",
+          "actor": 0
+        }
+      ],
+      "motion": {
+        "id": "pop",
+        "plays": "once",
+        "then": "idle",
+        "actors": [
+          {"actor":0,"offset":0}
+        ]
+      }
     }
   ]
 }

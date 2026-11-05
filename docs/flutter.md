@@ -70,7 +70,7 @@ final player = MascotPlayer(state: 'hello', random: mulberry32(7))..advance(1 / 
 states, long lists, screens that must stay still), use `BuddyStatic`: it draws the **resting pose** of a
 state, once. It is a stateless `CustomPaint` widget with no `Ticker`, no `AnimationController` and no
 timers, and it paints with the same `paintMascotFrame` as `Buddy` on the state's rest poses, so it draws
-exactly the pose `Buddy` starts from (a test compares the pixels, for all 85 states on both surfaces).
+exactly the pose `Buddy` starts from (a test compares the pixels, for all 86 states on both surfaces).
 
 ```dart
 import 'package:onstage_mascot/static.dart';
@@ -146,7 +146,7 @@ dart format .
 | `spec_drift_test.dart` | the generated data equals `spec/`; every state's clip exists |
 | `names_test.dart` | package and widget names equal `mascot.config.json` |
 | `buddy_test.dart` | motion then `onDone` then idle, reduced motion, the prop overriding `MediaQuery`, lifecycle pause, semantics, every state painting on both surfaces |
-| `static_test.dart` | `static.dart`'s import graph (no player, sampler, rng or motion data, no Ticker or Timer in what it loads), `BuddyStatic` builds all 85 states on both surfaces, schedules no frames, paints the same pixels as the frame painter and as `Buddy` at rest, and its semantics |
+| `static_test.dart` | `static.dart`'s import graph (no player, sampler, rng or motion data, no Ticker or Timer in what it loads), `BuddyStatic` builds all 86 states on both surfaces, schedules no frames, paints the same pixels as the frame painter and as `Buddy` at rest, and its semantics |
 | `parity_render_test.dart` | renders the parity PNGs (below) |
 | `parity_static_test.dart` | renders the static parity PNGs with `BuddyStatic` (below) |
 

@@ -1,9 +1,9 @@
 {
  "summary": {
-  "files": 85,
+  "files": 86,
   "failed": 0,
   "max": 4,
-  "meanOfMeans": 0.000367,
+  "meanOfMeans": 0.000362,
   "worstMean": 0.00167,
   "tolerance": {
    "max": 16.0,
@@ -606,6 +606,13 @@
    "ok": true,
    "max": 2,
    "mean": 0.00079,
+   "pixelsOver": 0.0
+  },
+  {
+   "file": "86-gift.png",
+   "ok": true,
+   "max": 0,
+   "mean": 0.0,
    "pixelsOver": 0.0
   }
  ]
