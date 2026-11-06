@@ -13,10 +13,10 @@ import { ROOT, web, webStatic, importClosure, checkSvg, readJson } from './helpe
 const DIST = path.join(ROOT, 'packages/web/dist');
 const SURFACES = ['light', 'dark'];
 
-test('static: STATE_KEYS and STATE_INFO list the 86 states of the full entry', async () => {
+test('static: STATE_KEYS and STATE_INFO list the 88 states of the full entry', async () => {
   const [m, s] = [await web(), await webStatic()];
   assert.deepEqual([...s.STATE_KEYS], [...m.STATE_KEYS]);
-  assert.equal(s.STATE_INFO.length, 86);
+  assert.equal(s.STATE_INFO.length, 88);
   s.STATE_INFO.forEach((info, i) => {
     const st = m.getState(info.key);
     assert.deepEqual(info, { key: st.key, group: st.group, name: st.name, use: st.use });
@@ -25,7 +25,7 @@ test('static: STATE_KEYS and STATE_INFO list the 86 states of the full entry', a
   assert.throws(() => s.renderRestSvg('nope'), /Unknown mascot state/);
 });
 
-test('static: renderRestSvg equals the animated player\'s resting frame, 86 states x 2 surfaces', async () => {
+test('static: renderRestSvg equals the animated player\'s resting frame, 88 states x 2 surfaces', async () => {
   const [m, s] = [await web(), await webStatic()];
   let checked = 0;
   for (const key of m.STATE_KEYS) {
@@ -43,7 +43,7 @@ test('static: renderRestSvg equals the animated player\'s resting frame, 86 stat
       checked++;
     }
   }
-  assert.equal(checked, 86 * 2);
+  assert.equal(checked, 88 * 2);
   assert.equal(s.renderRestSvg('hello'), s.renderRestSvg('hello', { surface: 'light' }), 'light is the default');
   assert.notEqual(s.renderRestSvg('hello', { surface: 'dark' }), s.renderRestSvg('hello'));
   console.log(`static rest frames: ${m.STATE_KEYS.length} states x ${SURFACES.length} surfaces identical to the player`);
@@ -142,7 +142,7 @@ test('static: BuddyStatic renders in a server component (no client directive, no
 test('static: the entries resolve by package name; static-svg runs without React', () => {
   const r = spawnSync(process.execPath, ['--input-type=module', '-e',
     "const s = await import('@onstageapp/mascot/static'); const v = await import('@onstageapp/mascot/static-svg'); console.log(typeof s.BuddyStatic, typeof s.renderRestSvg, typeof v.renderRestSvg, v.STATE_KEYS.length)"], { cwd: ROOT, encoding: 'utf8' });
-  assert.equal(r.stdout.trim(), 'function function function 86', r.stderr);
+  assert.equal(r.stdout.trim(), 'function function function 88', r.stderr);
   // static-svg alone, with module resolution of react blocked: it must not need it.
   const hooks = `data:text/javascript,${encodeURIComponent("export async function resolve(s, c, n) { if (s.startsWith('react')) throw new Error('react is not available'); return n(s, c); }")}`;
   const reg = `import { register } from 'node:module'; register(${JSON.stringify(hooks)}); const v = await import(${JSON.stringify(pathToFileURL(path.join(DIST, 'static-svg.js')).href)}); console.log(v.renderRestSvg('hello').length > 100)`;

@@ -1,8 +1,8 @@
-// Rest-pose parity: all 86 resting frames from the web renderer, rasterised by rsvg-convert at 240 px
+// Rest-pose parity: all 88 resting frames from the web renderer, rasterised by rsvg-convert at 240 px
 // on the card colour, against the PNGs the generator produced (tests/fixtures/rest-reference, copied
 // from claude-brain/design-work/mascot/blue-app-states/png). welcome-team moved on from the generator
-// (he holds up the team badge), and gift was added by hand after the import, so their references are
-// this renderer's own frames. Writes reports/rest-parity/.
+// (he holds up the team badge), and gift, files and photos were added by hand after the import, so
+// their references are this renderer's own frames. Writes reports/rest-parity/.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -23,7 +23,7 @@ test('resting frames match the generator PNGs', async () => {
   const r = spawnSync('python3', [path.join(ROOT, 'tests/parity/compare.py'), '--a', ref, '--b', out, '--report', report,
     '--tol-max', '16', '--tol-mean', '0.05', '--tol-pixels', '0', '--pixel-threshold', '16'], { encoding: 'utf8' });
   const summary = JSON.parse(r.stdout.trim().split('\n').pop());
-  assert.equal(summary.files, 86);
+  assert.equal(summary.files, 88);
   assert.equal(r.status, 0, r.stdout + r.stderr);
   console.log('rest parity', JSON.stringify(summary));
 });

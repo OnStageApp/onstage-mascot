@@ -13,16 +13,16 @@
       "gzipKB": 20.5
     },
     "states": {
-      "rawKB": 124.2,
-      "gzipKB": 11
+      "rawKB": 129.6,
+      "gzipKB": 11.4
     },
     "palette": {
       "rawKB": 1.4,
       "gzipKB": 0.5
     },
     "motionPlusStates": {
-      "rawKB": 228.9,
-      "gzipKB": 31.5
+      "rawKB": 234.3,
+      "gzipKB": 31.9
     }
   },
   "clips": {

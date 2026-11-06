@@ -1,6 +1,6 @@
 # Parity report
 
-86 files, 0 failing. Max 4, mean of means 0.000362.
+88 files, 0 failing. Max 4, mean of means 0.000354.
 
 | file | ok | max | mean | pixels over |
 |---|---|---|---|---|
@@ -90,3 +90,5 @@
 | 82-drums.png | yes | 0 | 0.0 | 0.0 |
 | 83-mixing.png | yes | 0 | 0.0 | 0.0 |
 | 86-gift.png | yes | 0 | 0.0 | 0.0 |
+| 87-files.png | yes | 0 | 0.0 | 0.0 |
+| 88-photos.png | yes | 0 | 0.0 | 0.0 |
