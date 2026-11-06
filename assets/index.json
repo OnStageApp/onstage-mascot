@@ -866,6 +866,26 @@
    "svgDark": "svg-dark/gift.svg",
    "png": "png/gift.png",
    "png1x": "png/gift@1x.png"
+  },
+  {
+   "key": "files",
+   "group": "Empty states",
+   "name": "No files yet",
+   "use": "Files and attachments, no files yet",
+   "svg": "svg/files.svg",
+   "svgDark": "svg-dark/files.svg",
+   "png": "png/files.png",
+   "png1x": "png/files@1x.png"
+  },
+  {
+   "key": "photos",
+   "group": "Empty states",
+   "name": "No photos yet",
+   "use": "Photos and images, no photos yet",
+   "svg": "svg/photos.svg",
+   "svgDark": "svg-dark/photos.svg",
+   "png": "png/photos.png",
+   "png1x": "png/photos@1x.png"
   }
  ]
 }

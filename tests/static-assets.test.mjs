@@ -12,7 +12,7 @@ const FIX = 'run `npm run build && npm run export-static`';
 test('assets/: SVG files and index.json equal the static entry output', async () => {
   const text = await buildTextAssets();
   const keys = Object.keys(text);
-  assert.equal(keys.length, 86 * 2 + 1);
+  assert.equal(keys.length, 88 * 2 + 1);
   for (const rel of keys) {
     const file = path.join(ASSETS, rel);
     assert.ok(fs.existsSync(file), `${rel} is missing: ${FIX}`);

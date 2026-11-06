@@ -1,9 +1,9 @@
 {
  "summary": {
-  "files": 86,
+  "files": 88,
   "failed": 0,
   "max": 4,
-  "meanOfMeans": 0.000362,
+  "meanOfMeans": 0.000354,
   "worstMean": 0.00167,
   "tolerance": {
    "max": 16.0,
@@ -610,6 +610,20 @@
   },
   {
    "file": "86-gift.png",
+   "ok": true,
+   "max": 0,
+   "mean": 0.0,
+   "pixelsOver": 0.0
+  },
+  {
+   "file": "87-files.png",
+   "ok": true,
+   "max": 0,
+   "mean": 0.0,
+   "pixelsOver": 0.0
+  },
+  {
+   "file": "88-photos.png",
    "ok": true,
    "max": 0,
    "mean": 0.0,

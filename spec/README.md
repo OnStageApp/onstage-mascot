@@ -6,7 +6,7 @@ and playback algorithm is in [`docs/renderer-contract.md`](../docs/renderer-cont
 | File | Edited by | What |
 |---|---|---|
 | `palette.json` | hand | Colour tokens per surface (`light`, `dark`). |
-| `states.json` | hand | All 86 states: scene (actors and props), rest poses, which motion plays. |
+| `states.json` | hand | All 88 states: scene (actors and props), rest poses, which motion plays. |
 | `props.json` | hand | Props on their own, without Buddy (0.4.0): instruments and tools for a lineup. |
 | `motion/<id>.json` | `npm run bake` only | Baked frames. Never edit by hand; change `tools/motion/definitions.mjs` and re-bake. |
 
@@ -103,7 +103,7 @@ linear interpolation of the 30 fps rows strays from the 60 fps rig, per clip.
 
 | id | kind | plays | used by |
 |---|---|---|---|
-| `pop` | additive | once | every state without its own motion (71) |
+| `pop` | additive | once | every state without its own motion (73) |
 | `idle` | additive | loop (3 s) | every state after its motion |
 | `blink` | additive | once (scheduled by the player) | idle |
 | `hello`, `welcome-team`, `all-set`, `no-events`, `no-results`, `event-created`, `invite-sent`, `plan-ready`, `done`, `waiting`, `offline`, `oops`, `session-expired`, `sleepy` | absolute | once | the state with the same key |

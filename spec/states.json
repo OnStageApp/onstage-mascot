@@ -4706,6 +4706,248 @@
           {"actor":0,"offset":0}
         ]
       }
+    },
+    {
+      "key": "files",
+      "group": "Empty states",
+      "name": "No files yet",
+      "use": "Files and attachments, no files yet",
+      "actors": [
+        {
+          "cx": 80,
+          "by": 196,
+          "s": 1.75,
+          "shadow": true,
+          "rest": {"x":0,"y":0,"tilt":0,"sx":1,"sy":1,"eyeL":"oval","eyeR":"oval","edx":4,"edy":0,"blink":1,"mouth":"curve","mw":7,"mdx":0,"mdy":0,"footL":0,"footR":0,"footLRot":0,"footRRot":0,"aL":0,"aLx":3,"aLy":27,"aLang":0,"aLlen":22,"aLthumb":0,"aR":1,"aRx":61,"aRy":29.7,"aRang":90,"aRlen":14,"aRthumb":0,"fold":0,"badge":0}
+        }
+      ],
+      "layers": [
+        {
+          "type": "actor",
+          "actor": 0
+        },
+        {
+          "type": "group",
+          "children": [
+            {
+              "type": "rect",
+              "x": 150,
+              "y": 96,
+              "w": 64,
+              "h": 88,
+              "rx": 6,
+              "ry": 6,
+              "fill": "coral"
+            }
+          ],
+          "transform": [
+            [
+              "rotate",
+              14,
+              182,
+              140
+            ]
+          ]
+        },
+        {
+          "type": "group",
+          "children": [
+            {
+              "type": "rect",
+              "x": 150,
+              "y": 96,
+              "w": 64,
+              "h": 88,
+              "rx": 6,
+              "ry": 6,
+              "fill": "deep"
+            }
+          ],
+          "transform": [
+            [
+              "rotate",
+              -9,
+              182,
+              140
+            ]
+          ]
+        },
+        {
+          "type": "path",
+          "d": "M144 104L190 104L210 124L210 194L144 194Z",
+          "fill": "ghost"
+        },
+        {
+          "type": "path",
+          "d": "M190 104L190 124L210 124Z",
+          "fill": "deep"
+        },
+        {
+          "type": "rect",
+          "x": 154,
+          "y": 118,
+          "w": 26,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 154,
+          "y": 136,
+          "w": 46,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 154,
+          "y": 149,
+          "w": 46,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 154,
+          "y": 162,
+          "w": 46,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 154,
+          "y": 175,
+          "w": 30,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        }
+      ],
+      "motion": {
+        "id": "pop",
+        "plays": "once",
+        "then": "idle",
+        "actors": [
+          {"actor":0,"offset":0}
+        ]
+      }
+    },
+    {
+      "key": "photos",
+      "group": "Empty states",
+      "name": "No photos yet",
+      "use": "Photos and images, no photos yet",
+      "actors": [
+        {
+          "cx": 80,
+          "by": 196,
+          "s": 1.75,
+          "shadow": true,
+          "rest": {"x":0,"y":0,"tilt":0,"sx":1,"sy":1,"eyeL":"oval","eyeR":"oval","edx":4,"edy":-2,"blink":1,"mouth":"curve","mw":7,"mdx":0,"mdy":0,"footL":0,"footR":0,"footLRot":0,"footRRot":0,"aL":0,"aLx":3,"aLy":27,"aLang":0,"aLlen":22,"aLthumb":0,"aR":1,"aRx":61,"aRy":24.3,"aRang":62,"aRlen":12,"aRthumb":0,"fold":0,"badge":0}
+        }
+      ],
+      "layers": [
+        {
+          "type": "group",
+          "children": [
+            {
+              "type": "rect",
+              "x": 142,
+              "y": 52,
+              "w": 72,
+              "h": 84,
+              "rx": 5,
+              "ry": 5,
+              "fill": "coral"
+            },
+            {
+              "type": "rect",
+              "x": 149,
+              "y": 59,
+              "w": 58,
+              "h": 54,
+              "rx": 2,
+              "ry": 2,
+              "fill": "coralLight"
+            }
+          ],
+          "transform": [
+            [
+              "rotate",
+              -12,
+              178,
+              94
+            ]
+          ]
+        },
+        {
+          "type": "group",
+          "children": [
+            {
+              "type": "rect",
+              "x": 138,
+              "y": 56,
+              "w": 76,
+              "h": 90,
+              "rx": 5,
+              "ry": 5,
+              "fill": "ghost"
+            },
+            {
+              "type": "rect",
+              "x": 145,
+              "y": 63,
+              "w": 62,
+              "h": 58,
+              "rx": 2,
+              "ry": 2,
+              "fill": "deep"
+            },
+            {
+              "type": "circle",
+              "cx": 192,
+              "cy": 77,
+              "r": 7,
+              "fill": "coral"
+            },
+            {
+              "type": "path",
+              "d": "M145 121L166 92L180 109L188 100L207 121Z",
+              "fill": "mint"
+            }
+          ],
+          "transform": [
+            [
+              "rotate",
+              8,
+              176,
+              101
+            ]
+          ]
+        },
+        {
+          "type": "actor",
+          "actor": 0
+        }
+      ],
+      "motion": {
+        "id": "pop",
+        "plays": "once",
+        "then": "idle",
+        "actors": [
+          {"actor":0,"offset":0}
+        ]
+      }
     }
   ]
 }

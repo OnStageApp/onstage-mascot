@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { loadGenerator } from '../tools/lib/sources.mjs';
 import { readJson, web } from './helpers.mjs';
 
-const HAND_ADDED = ['gift'];
+const HAND_ADDED = ['gift', 'files', 'photos'];
 
 test('spec/states.json keys equal the generator keys, in order, then the hand-added states', () => {
   const G = loadGenerator();
