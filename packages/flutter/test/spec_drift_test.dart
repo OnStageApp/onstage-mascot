@@ -39,10 +39,10 @@ void main() {
     expect(File('lib/src/spec_data.g.dart').existsSync(), isFalse);
   });
 
-  test('the bundled spec parses: 88 states, every clip they name', () {
+  test('the bundled spec parses: 89 states, every clip they name', () {
     final s = MascotSpec.instance;
-    expect(s.states, hasLength(88));
-    expect(s.stateKeys.toSet(), hasLength(88));
+    expect(s.states, hasLength(89));
+    expect(s.stateKeys.toSet(), hasLength(89));
     for (final st in s.states) {
       expect(s.clip(st.motion.id), isNotNull, reason: st.key);
     }
