@@ -886,6 +886,16 @@
    "svgDark": "svg-dark/photos.svg",
    "png": "png/photos.png",
    "png1x": "png/photos@1x.png"
+  },
+  {
+   "key": "web-platform",
+   "group": "Actions and tools",
+   "name": "Web platform",
+   "use": "Web platform: plan on a bigger screen. Never on payment or paywall screens",
+   "svg": "svg/web-platform.svg",
+   "svgDark": "svg-dark/web-platform.svg",
+   "png": "png/web-platform.png",
+   "png1x": "png/web-platform@1x.png"
   }
  ]
 }

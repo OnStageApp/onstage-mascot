@@ -5019,6 +5019,168 @@ const String statesJson = r'''
           {"actor":0,"offset":0}
         ]
       }
+    },
+    {
+      "key": "web-platform",
+      "group": "Actions and tools",
+      "name": "Web platform",
+      "use": "Web platform: plan on a bigger screen. Never on payment or paywall screens",
+      "actors": [
+        {
+          "cx": 140,
+          "by": 128,
+          "s": 1.5,
+          "shadow": false,
+          "rest": {"x":0,"y":0,"tilt":5,"sx":1,"sy":1,"eyeL":"big","eyeR":"big","edx":-3,"edy":1,"blink":1,"mouth":"none","mw":7,"mdx":0,"mdy":0,"footL":0,"footR":0,"footLRot":0,"footRRot":0,"aL":0,"aLx":3,"aLy":27,"aLang":0,"aLlen":22,"aLthumb":0,"aR":0,"aRx":61,"aRy":27,"aRang":0,"aRlen":22,"aRthumb":0,"fold":0,"badge":0}
+        }
+      ],
+      "layers": [
+        {
+          "type": "actor",
+          "actor": 0
+        },
+        {
+          "type": "rect",
+          "x": 40,
+          "y": 98,
+          "w": 160,
+          "h": 88,
+          "rx": 9,
+          "ry": 9,
+          "fill": "deep"
+        },
+        {
+          "type": "rect",
+          "x": 46,
+          "y": 104,
+          "w": 148,
+          "h": 76,
+          "rx": 5,
+          "ry": 5,
+          "fill": "ghost"
+        },
+        {
+          "type": "rect",
+          "x": 55,
+          "y": 113,
+          "w": 46,
+          "h": 8,
+          "rx": 4,
+          "ry": 4,
+          "fill": "coral"
+        },
+        {
+          "type": "circle",
+          "cx": 57,
+          "cy": 132,
+          "r": 2.4,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 64,
+          "y": 129.8,
+          "w": 74.4,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 51,
+          "y": 138.6,
+          "w": 138,
+          "h": 8.8,
+          "rx": 4.4,
+          "ry": 4.4,
+          "fill": "coralLight"
+        },
+        {
+          "type": "circle",
+          "cx": 57,
+          "cy": 143,
+          "r": 2.4,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 64,
+          "y": 140.8,
+          "w": 57.6,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "circle",
+          "cx": 57,
+          "cy": 154,
+          "r": 2.4,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 64,
+          "y": 151.8,
+          "w": 67.2,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "circle",
+          "cx": 57,
+          "cy": 165,
+          "r": 2.4,
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 64,
+          "y": 162.8,
+          "w": 48,
+          "h": 4.4,
+          "rx": 2.2,
+          "ry": 2.2,
+          "fill": "navy"
+        },
+        {
+          "type": "path",
+          "d": "M32 186L208 186L214 194L26 194Z",
+          "fill": "navy"
+        },
+        {
+          "type": "rect",
+          "x": 100,
+          "y": 89,
+          "w": 13,
+          "h": 20,
+          "rx": 6.5,
+          "ry": 6.5,
+          "fill": "body"
+        },
+        {
+          "type": "rect",
+          "x": 170,
+          "y": 91,
+          "w": 13,
+          "h": 20,
+          "rx": 6.5,
+          "ry": 6.5,
+          "fill": "body"
+        }
+      ],
+      "motion": {
+        "id": "pop",
+        "plays": "once",
+        "then": "idle",
+        "actors": [
+          {"actor":0,"offset":0}
+        ]
+      }
     }
   ]
 }
